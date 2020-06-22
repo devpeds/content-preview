@@ -1,9 +1,11 @@
 #container {
-    max-width: 720px;
+    max-width: 640px;
     margin: 0 auto;
 }
 
 #sidebar {
+    max-width: 280px;
+    padding-right: 24px;
     float: left;
     position: fixed;
 }
