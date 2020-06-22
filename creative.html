@@ -36,9 +36,12 @@
         .then(response => response.json())
         .then(function (entries) {
             let html = "";
+            let style;
+            let item;
             for (let i = 0; i < entries.items.length; i++) {
-                html += '<li><a href="?space=' + parameters.space + "&entry=" + entries.items[i].sys.id + '&access_token=' + parameters.access_token +'">' + entries.items[i].fields.title + '</a></li>';
-                console.log(entries.items[i].sys.id);
+                item = entries.items[i];
+                style = parameters.entry == item.sys.id ? '"active"' : '"inactive"';
+                html += '<li class=' + style + '><a href="?space=' + parameters.space + "&entry=" + item.sys.id + '&access_token=' + parameters.access_token + '">' + item.fields.title + '</a></li>';
             }
             $('#sidebar').html(html);
         });

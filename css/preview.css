@@ -10,6 +10,15 @@
 
 #sidebar li {
     list-style-type: none;
+    margin-top: 8px;
+}
+
+#sidebar li a {
+    color: rgba(0, 0, 0, .6);
+}
+
+#sidebar li.active a {
+    color: #f63d58;
 }
 
 #content {
