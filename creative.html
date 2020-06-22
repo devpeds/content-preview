@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/creative.css">
+    <link rel="stylesheet" href="css/preview.css">
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
@@ -30,13 +31,31 @@
     });
 
     const parameters = getParameters();
-    const url = 'https://preview.contentful.com/spaces/' + parameters.space + '/entries/' + parameters.entry + '?access_token=' + parameters.access_token;
+    let url = 'https://preview.contentful.com/spaces/' + parameters.space + '/entries' + '?content_type=creative&access_token=' + parameters.access_token;
+    fetch(url)
+        .then(response => response.json())
+        .then(function (entries) {
+            let html = "";
+            for (let i = 0; i < entries.items.length; i++) {
+                html += '<li><a href="?space=' + parameters.space + "&entry=" + entries.items[i].sys.id + '&access_token=' + parameters.access_token +'">' + entries.items[i].fields.title + '</a></li>';
+                console.log(entries.items[i].sys.id);
+            }
+            $('#sidebar').html(html);
+        });
+
+    url = 'https://preview.contentful.com/spaces/' + parameters.space + '/entries/' + parameters.entry + '?access_token=' + parameters.access_token;
     fetch(url)
         .then(response => response.json())
         .then(function (entry) {
             $('#content').html(md.render(entry.fields.content));
         });
 </script>
-<body id='content'>
+<body>
+<div id="container">
+    <div id='sidebar'>
+    </div>
+    <div id='content'>
+    </div>
+</div>
 </body>
 </html>

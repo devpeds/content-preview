@@ -1,0 +1,28 @@
+#container {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+#sidebar {
+    float: left;
+    position: fixed;
+}
+
+#sidebar li {
+    list-style-type: none;
+}
+
+#content {
+    max-width: 360px;
+    float: right;
+}
+
+#content > p:first-child {
+    margin: 0;
+}
+
+#content > p:first-child img {
+    margin-top: 0;
+    margin-bottom: 16px;
+    border-radius: 0;
+}
