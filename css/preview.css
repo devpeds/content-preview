@@ -41,14 +41,18 @@
     margin-bottom: 8px;
 }
 
+#nav > li.active > a {
+    color: #f63d58;
+}
+
 #nav > li.active > a:after {
     content: '';
     display: inline-block;
     margin: 0 0 2px 8px;
-    width: 6px;
-    height: 6px;
-    border-right: 1px solid rgba(0, 0, 0, .87);
-    border-bottom: 1px solid rgba(0, 0, 0, .87);
+    width: 4px;
+    height: 4px;
+    border-right: 2px solid #f63d58;
+    border-bottom: 2px solid #f63d58;
     -webkit-transform: rotate(45deg) !important;
     -moz-transform: rotate(45deg) !important;
     -o-transform: rotate(45deg) !important;
@@ -63,10 +67,10 @@
     content: '';
     display: inline-block;
     margin: 0 0 0 8px;
-    width: 6px;
-    height: 6px;
-    border-right: 1px solid rgba(0, 0, 0, .87);
-    border-bottom: 1px solid rgba(0, 0, 0, .87);
+    width: 4px;
+    height: 4px;
+    border-right: 2px solid rgba(0, 0, 0, .6);
+    border-bottom: 2px solid rgba(0, 0, 0, .6);
     -webkit-transform: rotate(-135deg) !important;
     -moz-transform: rotate(-135deg) !important;
     -o-transform: rotate(-135deg) !important;

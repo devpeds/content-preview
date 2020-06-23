@@ -22,7 +22,6 @@
         });
 
         //Get entry
-        console.log(baseUrl + parameters.entry + '?access_token=' + parameters.access_token)
         fetch(baseUrl + parameters.entry + '?access_token=' + parameters.access_token)
             .then(response => response.json())
             .then(function (entry) {
@@ -38,11 +37,7 @@
                 $('#keywords').append('<p></p>');
                 const keywords = entry.fields.keywords.split(', ');
                 for (let i = 0; i < keywords.length; i++) {
-                    if (i < keywords.length - 1) {
-                        $('#keywords').children('p').append('#' + keywords[i] + ', ');
-                    } else {
-                        $('#keywords').children('p').append('#' + keywords[i]);
-                    }
+                    $('#keywords').children('p').append('#' + keywords[i] + ' ');
                 }
 
                 //metaDescription
@@ -50,6 +45,8 @@
 
                 //intro
                 $('#intro').append(md.render(entry.fields.intro));
+
+
             });
 
         //Get country
