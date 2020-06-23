@@ -1,26 +1,80 @@
 #container {
-    max-width: 560px;
+    max-width: 720px;
     margin: 0 auto;
 }
 
-#sidebar {
-    max-width: 200px;
-    padding-right: 24px;
+#nav {
+    max-width: 280px;
     float: left;
+    top: 0;
+    bottom:0;
     position: fixed;
+    overflow-y:scroll;
 }
 
-#sidebar li {
-    list-style-type: none;
-    margin-top: 8px;
+#nav, #nav ul, #nav li {
+    list-style: none;
 }
 
-#sidebar li a {
-    color: rgba(0, 0, 0, .6);
+#nav ul {
+    padding: 0;
+    margin: 8px 0 0 0;
 }
 
-#sidebar li.active a {
+#nav a:hover, #nav ul > li.active > a {
     color: #f63d58;
+}
+
+#nav li a {
+    color: rgba(0, 0, 0, .6);
+    font-size: 14px;
+    line-height: 18px;
+}
+
+#nav > li {
+    margin: 16px 0;
+}
+
+#nav > li > a {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+#nav > li.active > a:after {
+    content: '';
+    display: inline-block;
+    margin: 0 0 2px 8px;
+    width: 6px;
+    height: 6px;
+    border-right: 1px solid rgba(0, 0, 0, .87);
+    border-bottom: 1px solid rgba(0, 0, 0, .87);
+    -webkit-transform: rotate(45deg) !important;
+    -moz-transform: rotate(45deg) !important;
+    -o-transform: rotate(45deg) !important;
+    transform: rotate(45deg) !important;
+    -webkit-transition: .25s ease-out !important;
+    -moz-transition: .25s ease-out !important;
+    -o-transition: .25s ease-out !important;
+    transition: .25s ease-out !important;
+}
+
+#nav > li > a:after {
+    content: '';
+    display: inline-block;
+    margin: 0 0 0 8px;
+    width: 6px;
+    height: 6px;
+    border-right: 1px solid rgba(0, 0, 0, .87);
+    border-bottom: 1px solid rgba(0, 0, 0, .87);
+    -webkit-transform: rotate(-135deg) !important;
+    -moz-transform: rotate(-135deg) !important;
+    -o-transform: rotate(-135deg) !important;
+    transform: rotate(-135deg) !important;
+    -webkit-transition: .25s ease-out !important;
+    -moz-transition: .25s ease-out !important;
+    -o-transition: .25s ease-out !important;
+    transition: .25s ease-out !important;
 }
 
 #content {
