@@ -24,8 +24,8 @@
         fetch(baseUrl + parameters.entry + '?access_token=' + parameters.access_token)
             .then(response => response.json())
             .then(function (entry) {
-                $('#content').html(md.render(entry.fields.content));
                 getEntries(entry.sys.contentType.sys.id);
+                $('#content').html(md.render(entry.fields.content));
             });
 
         //Get entries
@@ -36,6 +36,7 @@
                     let category;
                     let style;
                     entries.items.forEach(function (item) {
+                        console.log(item)
                         if (!$('#' + item.fields.category).length) {
                             $('#nav').append('<li id="' + item.fields.category + '"><a href="#">' + item.fields.category + '</a><ul></ul></li>');
                         }
@@ -65,7 +66,7 @@
 </head>
 <body>
 <div id="container">
-    <div id='sidebar'></div>
+    <div id='nav'></div>
     <div id='content'></div>
 </div>
 </body>

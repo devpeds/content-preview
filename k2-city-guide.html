@@ -67,7 +67,7 @@
                 .then(response => response.json())
                 .then(function (entries) {
                     entries.includes.Entry.forEach(function (item) {
-                        $('#nav').append('<li id="' + item.sys.id + '"><a href="#">' + item.fields.nameKo + '</a><ul></ul></li>');
+                        $('#nav').append('<li id="' + item.fields.nameKo + '"><a href="#">' + item.fields.nameKo + '</a><ul></ul></li>');
                     });
 
                     let category;
