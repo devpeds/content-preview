@@ -75,6 +75,7 @@
                             if (parameters.entry == item.sys.id) {
                                 style = 'active';
                                 category.addClass(style);
+                                category.addClass('open');
                             } else style = '';
 
                             category.children('ul').append('<li class="' + style + '"><a href="?space=' + parameters.space + "&entry=" + item.sys.id + '&access_token=' + parameters.access_token + '">' + item.fields.cityNameKo + '</a></li>');
@@ -84,7 +85,7 @@
                     $('#nav').navgoco({
                         caretHtml: '',
                         accordion: false,
-                        openClass: 'active',
+                        openClass: 'open',
                         save: false,
                         slide: {
                             duration: 400,

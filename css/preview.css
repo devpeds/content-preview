@@ -21,7 +21,7 @@
     margin: 8px 0 0 0;
 }
 
-#nav a:hover, #nav ul > li.active > a {
+#nav ul > li.active > a {
     color: #f63d58;
 }
 
@@ -46,13 +46,18 @@
 }
 
 #nav > li.active > a:after {
+    border-right: 2px solid #f63d58 !important;
+    border-bottom: 2px solid #f63d58 !important;
+}
+
+#nav > li.open > a:after {
     content: '';
     display: inline-block;
     margin: 0 0 2px 8px;
     width: 4px;
     height: 4px;
-    border-right: 2px solid #f63d58;
-    border-bottom: 2px solid #f63d58;
+    border-right: 2px solid rgba(0, 0, 0, .6);
+    border-bottom: 2px solid rgba(0, 0, 0, .6);
     -webkit-transform: rotate(45deg) !important;
     -moz-transform: rotate(45deg) !important;
     -o-transform: rotate(45deg) !important;
