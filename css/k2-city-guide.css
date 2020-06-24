@@ -2,3 +2,13 @@
     color: #2175ff;
     margin-bottom: 8px;
 }
+
+h2 + h2,
+h3 + h3 {
+    margin-top: -16px;
+}
+
+small {
+    font-weight: normal;
+    font-size: 14px;
+}
