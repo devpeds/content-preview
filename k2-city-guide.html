@@ -47,12 +47,36 @@
                 $('#intro').append(md.render(entry.fields.intro));
 
                 //routes
-
                 $('#routes').append('<h3>한국에서' + entry.fields.cityNameKo + '까지</h3>');
                 $('#routes').append('<p>' + entry.fields.routes[0].departure + '</p>');
                 $('#routes').append('<p><i class="ri-plane-line"></i></p>');
                 $('#routes').append('<p>' + entry.fields.routes[0].arrival + '</p>');
-                $('#routes').append('<p><i class="ri-subway-line"></i></p>');
+                switch (entry.fields.landmark.transportation) {
+                    case "Flight":
+                        break;
+
+                    case "Boat":
+                        break;
+
+                    case "Train":
+                        break;
+
+                    case "Subway":
+                        $('#routes').append('<p><i class="ri-subway-line"></i></p>');
+                        break;
+
+                    case "Bus":
+                        break;
+
+                    case "Car":
+                        break;
+
+                    case "Tram":
+                        break;
+
+                    case "Walk":
+                        break;
+                }
                 $('#routes').append('<p>' + entry.fields.landmark.name + '</p>');
             });
 
@@ -64,10 +88,10 @@
                     console.log(baseUrl + entryId + '?access_token=' + parameters.access_token)
 
                     //cityImage
-                    $('#cityImage').append('<img src=https://res.cloudinary.com/kyte/image/upload/IATA/locations/' + entry.fields.code + '/' + cityCodeEtp +'_0.jpg>');
+                    $('#cityImage').append('<img src=https://res.cloudinary.com/kyte/image/upload/IATA/locations/' + entry.fields.code + '/' + cityCodeEtp + '_0.jpg>');
 
                     //tagline
-                    $('#tagline').append('<h2><small>' + entry.fields.nameKo + '</small></h2>'+'<h2>' + tagline + '</h2>');
+                    $('#tagline').append('<h2><small>' + entry.fields.nameKo + '</small></h2>' + '<h2>' + tagline + '</h2>');
                 });
         }
 
