@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/k2-default.css">
     <link rel="stylesheet" href="css/preview.css">
     <link rel="stylesheet" href="css/k2-city-guide.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
@@ -44,21 +44,26 @@
                 $('#metaDescription').append('<p>' + entry.fields.metaDescription + '</p>');
 
                 //intro
+                $('#intro').append('<h3>' + entry.fields.cityNameKo + ' 소개</h3>');
                 $('#intro').append(md.render(entry.fields.intro));
+                // $('#intro').append('<button onclick="#" class="outline"><i class="ri-download-line"></i> 더보기</button>');
 
                 //routes
-                $('#routes').append('<h3>한국에서' + entry.fields.cityNameKo + '까지</h3>');
+                $('#routes').append('<h3>한국에서 ' + entry.fields.cityNameKo + '까지</h3>');
                 $('#routes').append('<p>' + entry.fields.routes[0].departure + '</p>');
                 $('#routes').append('<p><i class="ri-plane-line"></i></p>');
                 $('#routes').append('<p>' + entry.fields.routes[0].arrival + '</p>');
                 switch (entry.fields.landmark.transportation) {
                     case "Flight":
+                        $('#routes').append('<p><i class="ri-plane-line"></i></p>');
                         break;
 
                     case "Boat":
+                        $('#routes').append('<p><i class="ri-ship-line"></i></p>');
                         break;
 
                     case "Train":
+                        $('#routes').append('<p><i class="ri-train-line"></i></p>');
                         break;
 
                     case "Subway":
@@ -66,18 +71,38 @@
                         break;
 
                     case "Bus":
+                        $('#routes').append('<p><i class="ri-bus-line"></i></p>');
                         break;
-
+                        
                     case "Car":
+                        $('#routes').append('<p><i class="ri-roadster-line"></i></p>');
                         break;
-
+                        
                     case "Tram":
+                        $('#routes').append('<p><i class="ri-train-line"></i></p>');
                         break;
-
+                        
                     case "Walk":
+                        $('#routes').append('<p><i class="ri-walk-line"></i></p>');
                         break;
                 }
                 $('#routes').append('<p>' + entry.fields.landmark.name + '</p>');
+
+                //phrases
+                $('#phrases').append('<h3>이 단어만 알아도 현지인</h3>')
+                for (let i=0; i < entry.fields.phrases.length; i++){
+                    $('#phrases').append('<p>' + entry.fields.phrases[i].key + '</p>');
+                    $('#phrases').append('<p>' + entry.fields.phrases[i].value + '</p>');
+                }
+
+                //articles
+                $('#articles').append('<h3>' + entry.fields.cityNameKo + ' 언제갈까요?</h3>');
+                for (let i=0; i < entry.fields.articles.length; i++){
+                    $('#articles').append('<img src=' + entry.fields.articles[i].imageUrl + '>');
+                    $('#articles').append('<p>' + entry.fields.articles[i].title + '</p>');
+                    $('#articles').append('<p>' + entry.fields.articles[i].description + '</p>');
+                }
+
             });
 
         //Get country
@@ -131,7 +156,9 @@
                     });
                 });
         }
+        
     </script>
+
 </head>
 <body>
 <div id="container">
@@ -146,7 +173,11 @@
         <hr>
         <div id='routes'></div>
         <hr>
+        <div id='phrases'></div>
+        <hr>
+        <div id='articles'></div>
     </div>
 </div>
 </body>
 </html>
+

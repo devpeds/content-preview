@@ -1,14 +1,27 @@
 #keywords {
-    color: #2175ff;
     margin-bottom: 8px;
+}
+
+#keywords p{
+    color: #2175ff;
 }
 
 h2 + h2,
 h3 + h3 {
-    margin-top: -16px;
+    margin-top: -24px;
 }
 
 small {
     font-weight: normal;
-    font-size: 14px;
+    font-size: 13px;
+    color: rgba(0,0,0,.38);
+}
+
+p{
+    color: rgba(0,0,0,.6);
+}
+
+#cityImage{
+    width: 100%;
+    height: 240px;
 }
