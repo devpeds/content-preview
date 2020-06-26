@@ -49,47 +49,48 @@
                 // $('#intro').append('<button onclick="#" class="outline"><i class="ri-download-line"></i> 더보기</button>');
 
                 //routes
-                $('#routes').append('<h3>한국에서 ' + entry.fields.cityNameKo + '까지</h3>');
-                $('#routes').append('<p>' + entry.fields.routes[0].departure + '</p>');
-                $('#routes').append('<p><i class="ri-plane-line"></i></p>');
-                $('#routes').append('<p>' + entry.fields.routes[0].arrival + '</p>');
-                switch (entry.fields.landmark.transportation) {
+                $('#routes-tit').append('<h3>한국에서 ' + entry.fields.cityNameKo + '까지</h3>');
+                $('#routes-list').append('<p>' + entry.fields.routes[0].departure + '</p>');
+                $('#routes-list').append('<p class="box"><i class="ri-plane-line"></i> hh시간 mm분 비행</p>');
+                $('#routes-list').append('<p>' + entry.fields.routes[0].arrival + '</p>');
+                switch (entry.fields.landmark.transportation) { 
                     case "Flight":
-                        $('#routes').append('<p><i class="ri-plane-line"></i></p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-plane-line"></i>' + entry.fields.landmark.description + ' </p>');
                         break;
 
                     case "Boat":
-                        $('#routes').append('<p><i class="ri-ship-line"></i></p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-ship-line"></i>' + entry.fields.landmark.description + '</p>');
                         break;
 
                     case "Train":
-                        $('#routes').append('<p><i class="ri-train-line"></i></p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-train-line"></i>' + entry.fields.landmark.description + '</p>');
                         break;
 
                     case "Subway":
-                        $('#routes').append('<p><i class="ri-subway-line"></i></p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-subway-line"></i>' + entry.fields.landmark.description + '</p>');
                         break;
 
                     case "Bus":
-                        $('#routes').append('<p><i class="ri-bus-line"></i></p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-bus-line"></i>' + entry.fields.landmark.description + '</p>');
                         break;
                         
                     case "Car":
-                        $('#routes').append('<p><i class="ri-roadster-line"></i></p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-roadster-line"></i>' + entry.fields.landmark.description + '</p>');
                         break;
                         
                     case "Tram":
-                        $('#routes').append('<p><i class="ri-train-line"></i></p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-train-line"></i>' + entry.fields.landmark.description + '</p>');
                         break;
                         
                     case "Walk":
-                        $('#routes').append('<p><i class="ri-walk-line"></i></p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-walk-line"></i>' + entry.fields.landmark.description + '</p>');
                         break;
                 }
-                $('#routes').append('<p>' + entry.fields.landmark.name + '</p>');
+                $('#routes-list').append('<p>' + entry.fields.landmark.name + '</p>');
+            
 
                 //phrases
-                $('#phrases').append('<h3>이 단어만 알아도 현지인</h3>')
+                $('#phrases-tit').append('<h3>이 단어만 알아도 현지인</h3>')
                 for (let i=0; i < entry.fields.phrases.length; i++){
                     $('#phrases').append('<p>' + entry.fields.phrases[i].key + '</p>');
                     $('#phrases').append('<p>' + entry.fields.phrases[i].value + '</p>');
@@ -171,9 +172,25 @@
         <hr>
         <div id='intro'></div>
         <hr>
-        <div id='routes'></div>
+        <div id='routes'>
+            <div id="routes-tit"></div>
+            <div id="routes-con">
+                <div id="routes-line">
+                    <div class="dot-box">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <div class="line"></div>
+                    <!-- <div class="line"></div> -->
+                </div>
+                <div id="routes-list"></div>
+            </div>
+        </div>
         <hr>
-        <div id='phrases'></div>
+        <div id='phrases'>
+            <div id="phrases-tit"></div>
+        </div>
         <hr>
         <div id='articles'></div>
     </div>

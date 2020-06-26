@@ -25,3 +25,84 @@ p{
     width: 100%;
     height: 240px;
 }
+
+#routes-list p:nth-child(3){
+    color: #2175ff;
+}
+
+#routes-con{
+    width: 100%;
+}
+
+#routes-list{
+    width: 100%;
+}
+
+#routes p{
+    color: rgba(0,0,0,.87);
+    margin-left: 8px;
+}
+
+#routes i{
+    margin-right: 8px;
+}
+
+#routes-con{
+    display: inline-flex;
+}
+
+.box{
+    padding: 15px;
+    background-color: #fafafa;
+    border-radius: 8px;
+}
+
+#routes-line{
+    width: 14px;
+    height: 214px;
+    margin-left: 24px;
+    margin-top: 22px;
+    position: relative;
+}
+
+.line{
+    width: 1px;
+    height: 100%;
+    margin-left: 3px;
+    background-color: rgba(0,0,0,.12);
+    position: absolute;
+    top: 0;
+}
+
+.dot-box{
+    width: 14px;
+    height: 214px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+}
+
+.dot{
+    width: 6px;
+    height: 6px;
+    border-radius: 4.5px;
+}
+
+.dot:first-child,.dot:last-child{
+    border: 1px solid rgba(0,0,0,.38);
+    background-color: #fff;
+}
+
+.dot:nth-child(2){
+    background-color: #2175ff;
+    border: 1px solid #2175ff;
+}
+
+/* .line{
+    width: 1px;
+    height: 100%;
+    background-color: rgba(0,0,0,.12);
+    float: left;
+} */
