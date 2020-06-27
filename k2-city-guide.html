@@ -6,8 +6,14 @@
     <link rel="stylesheet" href="css/preview.css">
     <link rel="stylesheet" href="css/k2-city-guide.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+
+    <script src="https://unpkg.com/swiper/js/swiper.js"></script>
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <script src="js/jquery.navgoco.min.js"></script>
     <script src="js/common.js"></script>
@@ -116,6 +122,8 @@
                 var currentIndex = 0;
                 var topHeight = 0;
                 var slideWidth = slides[0].offsetWidth;
+                var prev = document.getElementById('prev');
+                var next = document.getElementById('next');
             
                 function calcTallest(){
                     for(var i=0; i < slideCount; i++){
@@ -132,7 +140,35 @@
                     slides[i].style.left = i * slideWidth + 'px';
                     slides[i].style.width = slideWidth + 'px';
                 }
-                
+
+                function moveSlide(idx){
+                    slideWrapper[0].style.left = idx * -100 + '%';
+                    slideWrapper[0].classList.add('animated');
+                    currentIndex = idx;
+                    updateNav();
+                }
+
+                function updateNav(){
+                    if(currentIndex == 0){
+                        prev.classList.add('disabled');
+                    }else{
+                        prev.classList.remove('disabled');
+                    }
+                    if(currentIndex == slideCount - 1){
+                        next.classList.add('disabled');
+                    }else{
+                        next.classList.remove('disabled');
+                    }
+                }
+
+                prev.addEventListener('click', function(){
+                    moveSlide(currentIndex - 1);
+                })
+                next.addEventListener('click', function(){
+                    moveSlide(currentIndex+ 1);
+                })
+
+                moveSlide(0);
 
             });
 
@@ -225,12 +261,13 @@
         <div id='articles'>
             <div id="articles-tit"></div>
             <div class="slide-container">
-                <div class="slide-wrapper"></div>  
+                <div class="slide-wrapper"></div>
+                <div id="prev"><i class="ri-arrow-left-s-line"></i></div>
+                <div id="next"><i class="ri-arrow-right-s-line"></i></div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>
 
