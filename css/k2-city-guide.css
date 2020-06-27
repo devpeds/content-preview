@@ -110,7 +110,7 @@ p{
 
 .slide-container{
     position: relative;
-    /* overflow: hidden; */
+    overflow: hidden;
     margin-left: 24px;
     margin-right: 24px;
 }
