@@ -125,7 +125,7 @@
                 var prev = document.getElementById('prev');
                 var next = document.getElementById('next');
             
-                window.onload = function calcTallest(){
+                function calcTallest(){
                     for(var i=0; i < slideCount; i++){
                         if(slides[i].offsetHeight > topHeight){
                             topHeight = slides[i].offsetHeight;
