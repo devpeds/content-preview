@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/preview.css">
     <link rel="stylesheet" href="css/k2-city-guide.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <script src="js/jquery.navgoco.min.js"></script>
@@ -13,6 +14,7 @@
     <script>
         const parameters = getParameters();
         const baseUrl = 'https://preview.contentful.com/spaces/' + parameters.space + '/entries/';
+        
 
         let md;
         require(['https://cdnjs.cloudflare.com/ajax/libs/remarkable/2.0.1/remarkable.min.js'], function (remarkable) {
@@ -97,12 +99,40 @@
                 }
 
                 //articles
-                $('#articles').append('<h3>' + entry.fields.cityNameKo + ' 언제갈까요?</h3>');
-                for (let i=0; i < entry.fields.articles.length; i++){
-                    $('#articles').append('<img src=' + entry.fields.articles[i].imageUrl + '>');
-                    $('#articles').append('<p>' + entry.fields.articles[i].title + '</p>');
-                    $('#articles').append('<p>' + entry.fields.articles[i].description + '</p>');
+                $('#articles-tit').append('<h3>' + entry.fields.cityNameKo + ' 언제갈까요?</h3>');
+                var slidesCounter = entry.fields.articles.length;
+
+                for (let i=0; i < slidesCounter; i++){
+                        var addDiv = document.createElement('div');
+                        addDiv.innerHTML = ('<img src=' + entry.fields.articles[i].imageUrl + '><p>' + entry.fields.articles[i].title + '</p><p>' + entry.fields.articles[i].description + '</p>');
+                        var getArticles = document.querySelector('.slide-wrapper').appendChild(addDiv);
+                        $(getArticles).addClass('slide');
                 }
+
+                var slideContainer = document.getElementsByClassName('slide-container');
+                var slideWrapper = document.getElementsByClassName('slide-wrapper');
+                var slides = document.getElementsByClassName('slide');
+                var slideCount = slides.length;
+                var currentIndex = 0;
+                var topHeight = 0;
+                var slideWidth = slides[0].offsetWidth;
+            
+                function calcTallest(){
+                    for(var i=0; i < slideCount; i++){
+                        if(slides[i].offsetHeight > topHeight){
+                            topHeight = slides[i].offsetHeight;
+                        }
+                    }
+                    slideContainer[0].style.height = topHeight + 'px';
+                    slideWrapper[0].style.height = topHeight + 'px';
+                }
+                calcTallest();
+
+                for(var i=0; i < slideCount; i++){
+                    slides[i].style.left = i * slideWidth + 'px';
+                    slides[i].style.width = slideWidth + 'px';
+                }
+                
 
             });
 
@@ -192,9 +222,15 @@
             <div id="phrases-tit"></div>
         </div>
         <hr>
-        <div id='articles'></div>
+        <div id='articles'>
+            <div id="articles-tit"></div>
+            <div class="slide-container">
+                <div class="slide-wrapper"></div>  
+            </div>
+        </div>
     </div>
 </div>
+
 </body>
 </html>
 
