@@ -54,7 +54,7 @@
                 //intro
                 $('#intro').append('<h3>' + entry.fields.cityNameKo + ' 소개</h3>');
                 $('#intro').append(md.render(entry.fields.intro));
-                // $('#intro').append('<button onclick="#" class="outline"><i class="ri-download-line"></i> 더보기</button>');
+                // 더보기 버튼 $('#intro').append('<button onclick="#" class="outline"><i class="ri-download-line"></i> 더보기</button>'); 
 
                 //routes
                 $('#routes-tit').append('<h3>한국에서 ' + entry.fields.cityNameKo + '까지</h3>');
@@ -99,22 +99,53 @@
 
                 //phrases
                 $('#phrases-tit').append('<h3>이 단어만 알아도 현지인</h3>')
+                var addDiv;
                 for (let i=0; i < entry.fields.phrases.length; i++){
-                    $('#phrases').append('<p>' + entry.fields.phrases[i].key + '</p>');
-                    $('#phrases').append('<p>' + entry.fields.phrases[i].value + '</p>');
+                        addDiv = document.createElement('div');
+                        addDiv.innerHTML = ('<p>' + entry.fields.phrases[i].key + '</p><p>' + entry.fields.phrases[i].value + '</p>');
+                        var getPhrases = document.querySelector('#phrases-container').appendChild(addDiv);
+                        $(getPhrases).addClass('phrases');
                 }
+
+                //info
+                $('#info-tit').append('<h3>' + entry.fields.cityNameKo + '알아가기</h3>')
+                $('#info-container').append('<div><i class="ri-translate-2"></i><h4>' + entry.fields.languages[0].mainText + '</h4><p>' + entry.fields.languages[0].subText + '</p></div>');
+                $('#info-container').append('<div><i class="ri-empathize-line"></i><h4>' + '종교' + '</h4><p>' + entry.fields.religions + '</p></div>');
+                if(entry.fields.currencies){
+                    $('#info-container').append('<div><i class="ri-money-dollar-circle-line"></i><h4>' + '통화' + '</h4><p>' + entry.fields.currencies + '</p></div>');
+                };
+                if(entry.fields.electricity){
+                    $('#info-container').append('<div><i class="ri-plug-line"></i><h4>' + '전압' + '</h4><p>' + entry.fields.electricity + '</p></div>');
+                };
+                if(entry.fields.tipping){
+                    $('#info-container').append('<div><i class="ri-hand-coin-line"></i><h4>' + '팁 문화' + '</h4><p>' + entry.fields.tipping + '</p></div>');
+                };
+                if(entry.fields.visa){
+                    $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + '비자' + '</h4><p>' + entry.fields.visa + '</p></div>');
+                };
+                if(entry.fields.callingCode){
+                    $('#info-container').append('<div><i class="ri-phone-line"></i><h4>' + '국가번호' + '</h4><p>' + entry.fields.callingCode + '</p></div>');
+                };
+                
 
                 //articles
                 $('#articles-tit').append('<h3>' + entry.fields.cityNameKo + ' 언제갈까요?</h3>');
                 var slidesCounter = entry.fields.articles.length;
+                var imgUrl;
 
                 for (let i=0; i < slidesCounter; i++){
-                        var addDiv = document.createElement('div');
-                        addDiv.innerHTML = ('<img src=' + entry.fields.articles[i].imageUrl + '><p>' + entry.fields.articles[i].title + '</p><p>' + entry.fields.articles[i].description + '</p>');
+                        addDiv = document.createElement('div');
+                        if(entry.fields.articles[i].imageUrl){
+                            imgUrl = entry.fields.articles[i].imageUrl;
+                        }else{
+                            imgUrl = "https://res.cloudinary.com/kyte/image/upload/v1593414810/cities/default-img.jpg";
+                        };
+                        addDiv.innerHTML = ('<img src=' + imgUrl + '><h4>' + entry.fields.articles[i].title + '</h4><p>' + entry.fields.articles[i].description + '</p>');
                         var getArticles = document.querySelector('.slide-wrapper').appendChild(addDiv);
                         $(getArticles).addClass('slide');
                 }
 
+                //articles Slide
                 var slideContainer = document.getElementsByClassName('slide-container');
                 var slideWrapper = document.getElementsByClassName('slide-wrapper');
                 var slides = document.getElementsByClassName('slide');
@@ -256,6 +287,12 @@
         <hr>
         <div id='phrases'>
             <div id="phrases-tit"></div>
+            <div id="phrases-container"></div>
+        </div>
+        <hr>
+        <div id="info">
+            <div id="info-tit"></div>
+            <div id="info-container"></div>
         </div>
         <hr>
         <div id='articles'>
@@ -266,6 +303,7 @@
                 <div id="next"><i class="ri-arrow-right-s-line"></i></div>
             </div>
         </div>
+        <hr>
     </div>
 </div>
 </body>
