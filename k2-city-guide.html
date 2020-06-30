@@ -20,7 +20,6 @@
     <script>
         const parameters = getParameters();
         const baseUrl = 'https://preview.contentful.com/spaces/' + parameters.space + '/entries/';
-        
 
         let md;
         require(['https://cdnjs.cloudflare.com/ajax/libs/remarkable/2.0.1/remarkable.min.js'], function (remarkable) {
@@ -34,177 +33,158 @@
         fetch(baseUrl + parameters.entry + '?access_token=' + parameters.access_token)
             .then(response => response.json())
             .then(function (entry) {
-                getEntries(entry.sys.contentType.sys.id);
+                const fields = entry.fields;
 
                 console.log(baseUrl + parameters.entry + '?access_token=' + parameters.access_token);
-
-                
+                getEntries(entry.sys.contentType.sys.id);
 
                 //country
-                getCountry(entry.fields.country.sys.id, entry.fields.cityCodeEtp, entry.fields.tagline);
+                getCountry(fields.country.sys.id, fields.cityCodeEtp, fields.tagline);
 
                 //keyword
                 $('#keywords').append('<p></p>');
-                const keywords = entry.fields.keywords.split(', ');
+                const keywords = fields.keywords.split(', ');
                 for (let i = 0; i < keywords.length; i++) {
                     $('#keywords').children('p').append('#' + keywords[i] + ' ');
                 }
 
                 //metaDescription
-                $('#metaDescription').append('<p>' + entry.fields.metaDescription + '</p>');
+                $('#metaDescription').append('<p>' + fields.metaDescription + '</p>');
 
                 //intro
-                $('#intro').append('<h3>' + entry.fields.cityNameKo + ' 소개</h3>');
-                $('#intro').append(md.render(entry.fields.intro));
+                $('#intro').append('<h3>' + fields.cityNameKo + ' 소개</h3>');
+                $('#intro').append(md.render(fields.intro));
                 // 더보기 버튼 $('#intro').append('<button onclick="#" class="outline"><i class="ri-download-line"></i> 더보기</button>'); 
 
                 //routes
-                $('#routes').prepend('<h3>한국에서 ' + entry.fields.cityNameKo + '까지</h3>');
-                $('#routes-list').append('<p>' + entry.fields.routes[0].departure + '</p><p class="box"><i class="ri-plane-line"></i> hh시간 mm분 비행</p>');
-                $('#routes-list').append('<p>' + entry.fields.routes[0].arrival + '</p>');
-                switch (entry.fields.landmark.transportation) { 
+                $('#routes').prepend('<h3>한국에서 ' + fields.cityNameKo + '까지</h3>');
+                $('#routes-list').append('<p>' + fields.routes[0].departure + '</p><p class="box"><i class="ri-plane-line"></i> hh시간 mm분 비행</p>');
+                $('#routes-list').append('<p>' + fields.routes[0].arrival + '</p>');
+                const landmark = fields.landmark;
+                switch (landmark.transportation) { 
                     case "Flight":
-                        $('#routes-list').append('<p class="box"><i class="ri-plane-line"></i>' + entry.fields.landmark.description + ' </p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-plane-line"></i>' + landmark.description + '</p>');
                         break;
 
                     case "Boat":
-                        $('#routes-list').append('<p class="box"><i class="ri-ship-line"></i>' + entry.fields.landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-ship-line"></i>' + landmark.description + '</p>');
                         break;
 
                     case "Train":
-                        $('#routes-list').append('<p class="box"><i class="ri-train-line"></i>' + entry.fields.landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-train-line"></i>' + landmark.description + '</p>');
                         break;
 
                     case "Subway":
-                        $('#routes-list').append('<p class="box"><i class="ri-subway-line"></i>' + entry.fields.landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-subway-line"></i>' + landmark.description + '</p>');
                         break;
 
                     case "Bus":
-                        $('#routes-list').append('<p class="box"><i class="ri-bus-line"></i>' + entry.fields.landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-bus-line"></i>' + landmark.description + '</p>');
                         break;
                         
                     case "Car":
-                        $('#routes-list').append('<p class="box"><i class="ri-roadster-line"></i>' + entry.fields.landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-roadster-line"></i>' + landmark.description + '</p>');
                         break;
                         
                     case "Tram":
-                        $('#routes-list').append('<p class="box"><i class="ri-train-line"></i>' + entry.fields.landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-train-line"></i>' + landmark.description + '</p>');
                         break;
                         
                     case "Walk":
-                        $('#routes-list').append('<p class="box"><i class="ri-walk-line"></i>' + entry.fields.landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box"><i class="ri-walk-line"></i>' + landmark.description + '</p>');
                         break;
                 }
-                $('#routes-list').append('<p>' + entry.fields.landmark.name + '</p>');
+                $('#routes-list').append('<p>' + landmark.name + '</p>');
             
-                var addDiv;
-
                 //phrases
                 $('#phrases').prepend('<h3>이 단어만 알아도 현지인</h3>')
-                for (let i=0; i < entry.fields.phrases.length; i++){
-                        addDiv = document.createElement('div');
-                        addDiv.innerHTML = ('<p>' + entry.fields.phrases[i].key + '</p><p>' + entry.fields.phrases[i].value + '</p>');
-                        var getPhrases = document.querySelector('#phrases-container').appendChild(addDiv);
-                        $(getPhrases).addClass('phrases');
+                for (let i = 0; i < fields.phrases.length; i++){
+                    $('#phrases-container').append('<div class="phrases"><p>' + fields.phrases[i].key + '</p><p>' + fields.phrases[i].value + '</p></div>');
                 }
 
                 //weather
-                $('#weather').prepend('<h3>오늘의 ' + entry.fields.cityNameKo + '날씨</h3>');
-                var getSeason;
-                for (let i=0; i < entry.fields.specialDates.length; i++){
-                    if(entry.fields.specialDates[i].type === "season"){
-                        addDiv = document.createElement('div');
-                        addDiv.innerHTML = ('<i class="ri-pushpin-line"></i><h5>' + entry.fields.specialDates[i].description + '</h5><p>' + entry.fields.specialDates[i].startMonth + '월~' + entry.fields.specialDates[i].endMonth + '월</p>');
-                        getSeason = document.querySelector('#season').appendChild(addDiv);
+                $('#weather').prepend('<h3>오늘의 ' + fields.cityNameKo + '날씨</h3>');
+                for (let i = 0; i < fields.specialDates.length; i++){
+                    if (fields.specialDates[i].type === "season"){
+                        $('#season').append('<div><i class="ri-pushpin-line"></i><h5>' + fields.specialDates[i].description + '</h5><p>' + fields.specialDates[i].startMonth + '월~' + fields.specialDates[i].endMonth + '월</p></div>');
                     }
-                    if(entry.fields.specialDates[i].type === "avoidingSeason"){
-                        addDiv = document.createElement('div');
-                        addDiv.innerHTML = ('<i class="ri-pushpin-fill"></i><h5>' + entry.fields.specialDates[i].description + '</h5><p>' + entry.fields.specialDates[i].startMonth + '월~' + entry.fields.specialDates[i].endMonth + '월</p>');
-                        getSeason = document.querySelector('#season').appendChild(addDiv);
+                    if (entry.fields.specialDates[i].type === "avoidingSeason"){
+                        $('#season').append('<div><i class="ri-pushpin-fill"></i><h5>' + fields.specialDates[i].description + '</h5><p>' + fields.specialDates[i].startMonth + '월~' + fields.specialDates[i].endMonth + '월</p></div>');
                     }
                 }
 
                 //info
-                $('#info').prepend('<h3>' + entry.fields.cityNameKo + '알아가기</h3>')
-                $('#info-container').append('<div><i class="ri-translate-2"></i><h4>' + entry.fields.languages[0].mainText + '</h4><p>' + entry.fields.languages[0].subText + '</p></div>');
-                $('#info-container').append('<div><i class="ri-empathize-line"></i><h4>' + '종교' + '</h4><p>' + entry.fields.religions + '</p></div>');
-                if(entry.fields.currencies){
-                    $('#info-container').append('<div><i class="ri-money-dollar-circle-line"></i><h4>' + '통화' + '</h4><p>' + entry.fields.currencies + '</p></div>');
+                $('#info').prepend('<h3>' + fields.cityNameKo + '알아가기</h3>')
+                $('#info-container').append('<div><i class="ri-translate-2"></i><h4>' + fields.languages[0].mainText + '</h4><p>' + fields.languages[0].subText + '</p></div>');
+                $('#info-container').append('<div><i class="ri-empathize-line"></i><h4>' + '종교' + '</h4><p>' + fields.religions + '</p></div>');
+                if (fields.currencies){
+                    $('#info-container').append('<div><i class="ri-money-dollar-circle-line"></i><h4>' + '통화' + '</h4><p>' + fields.currencies + '</p></div>');
                 };
-                if(entry.fields.electricity){
-                    $('#info-container').append('<div><i class="ri-plug-line"></i><h4>' + '전압' + '</h4><p>' + entry.fields.electricity + '</p></div>');
+                if (fields.electricity){
+                    $('#info-container').append('<div><i class="ri-plug-line"></i><h4>' + '전압' + '</h4><p>' + fields.electricity + '</p></div>');
                 };
-                if(entry.fields.tipping){
-                    $('#info-container').append('<div><i class="ri-hand-coin-line"></i><h4>' + '팁 문화' + '</h4><p>' + entry.fields.tipping + '</p></div>');
+                if (fields.tipping){
+                    $('#info-container').append('<div><i class="ri-hand-coin-line"></i><h4>' + '팁 문화' + '</h4><p>' + fields.tipping + '</p></div>');
                 };
-                if(entry.fields.visa){
-                    $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + '비자' + '</h4><p>' + entry.fields.visa + '</p></div>');
+                if (fields.visa){
+                    $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + '비자' + '</h4><p>' + fields.visa + '</p></div>');
                 };
-                if(entry.fields.callingCode){
-                    $('#info-container').append('<div><i class="ri-phone-line"></i><h4>' + '국가번호' + '</h4><p>' + entry.fields.callingCode + '</p></div>');
+                if (fields.callingCode){
+                    $('#info-container').append('<div><i class="ri-phone-line"></i><h4>' + '국가번호' + '</h4><p>' + fields.callingCode + '</p></div>');
                 };
-                
 
                 //articles
-                $('#articles').prepend('<h3>' + entry.fields.cityNameKo + ' 언제갈까요?</h3>');
-                var slidesCounter = entry.fields.articles.length;
+                $('#articles').prepend('<h3>' + fields.cityNameKo + ' 언제갈까요?</h3>');
                 var imgUrl;
-
-                for (let i=0; i < slidesCounter; i++){
-                        addDiv = document.createElement('div');
-                        if(entry.fields.articles[i].imageUrl){
-                            imgUrl = entry.fields.articles[i].imageUrl;
-                        }else{
-                            imgUrl = "https://res.cloudinary.com/kyte/image/upload/v1593414810/cities/default-img.jpg";
-                        };
-                        addDiv.innerHTML = ('<img src=' + imgUrl + '><h4>' + entry.fields.articles[i].title + '</h4><p>' + entry.fields.articles[i].description + '</p>');
-                        var getArticles = document.querySelector('.slide-wrapper').appendChild(addDiv);
-                        $(getArticles).addClass('slide');
-                }
+                for (let i = 0; i < fields.articles.length; i++) {
+                    if (fields.articles[i].imageUrl){
+                        imgUrl = fields.articles[i].imageUrl;
+                    } else {
+                        imgUrl = "https://res.cloudinary.com/kyte/image/upload/v1593414810/cities/default-img.jpg";
+                    };
+                    $('.slide-wrapper').append('<div class="slide"><img src=' + imgUrl + '><h4>' + fields.articles[i].title + '</h4><p>' + fields.articles[i].description + '</p></div>');
+                };
 
                 //articles Slide
                 var slideContainer = document.getElementsByClassName('slide-container');
                 var slideWrapper = document.getElementsByClassName('slide-wrapper');
                 var slides = document.getElementsByClassName('slide');
-                var slideCount = slides.length;
                 var currentIndex = 0;
                 var topHeight = 0;
                 var slideWidth = slides[0].offsetWidth;
                 var prev = document.getElementById('prev');
                 var next = document.getElementById('next');
             
-                function calcTallest(){
-                    for(var i=0; i < slideCount; i++){
-                        if(slides[i].offsetHeight > topHeight){
-                            topHeight = slides[i].offsetHeight;
-                        }
-                    }
-                    slideContainer[0].style.height = topHeight + 'px';
-                    slideWrapper[0].style.height = topHeight + 'px';
+                for (var i = 0; i < slides.length; i++) {
+                    if (slides[i].offsetHeight > topHeight){
+                        topHeight = slides[i].offsetHeight;
+                    }                
                 }
-                calcTallest();
+                slideContainer[0].style.height = topHeight + 'px';
+                slideWrapper[0].style.height = topHeight + 'px';
 
-                for(var i=0; i < slideCount; i++){
+                for (var i = 0; i < slides.length; i++) {
                     slides[i].style.left = i * slideWidth + 'px';
                     slides[i].style.width = slideWidth + 'px';
                 }
 
-                function moveSlide(idx){
-                    slideWrapper[0].style.left = idx * -100 + '%';
+                function moveSlide(i){
+                    slideWrapper[0].style.left = i * -100 + '%';
                     slideWrapper[0].classList.add('animated');
-                    currentIndex = idx;
+                    currentIndex = i;
                     updateNav();
                 }
 
                 function updateNav(){
-                    if(currentIndex == 0){
+                    if (currentIndex == 0) { 
                         prev.classList.add('disabled');
-                    }else{
+                    } else {
                         prev.classList.remove('disabled');
-                    }
-                    if(currentIndex == slideCount - 1){
+                    } 
+                    
+                    if (currentIndex == slideCount - 1){
                         next.classList.add('disabled');
-                    }else{
+                    } else {
                         next.classList.remove('disabled');
                     }
                 }
@@ -212,12 +192,12 @@
                 prev.addEventListener('click', function(){
                     moveSlide(currentIndex - 1);
                 })
+
                 next.addEventListener('click', function(){
-                    moveSlide(currentIndex+ 1);
+                    moveSlide(currentIndex + 1);
                 })
 
                 moveSlide(0);
-
             });
 
         //Get country
@@ -358,4 +338,3 @@
 </div>
 </body>
 </html>
-
