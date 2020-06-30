@@ -7,7 +7,7 @@ img {
 }
 
 #keywords p{
-    color: #2175ff;
+    color: $blue;
 }
 
 h2 + h2,
@@ -36,7 +36,7 @@ p{
 
 /* routes */
 #routes-list p:nth-child(3){
-    color: #2175ff;
+    color: $blue;
 }
 
 #routes-con{
@@ -105,8 +105,8 @@ p{
 }
 
 .dot:nth-child(2){
-    background-color: #2175ff;
-    border: 1px solid #2175ff;
+    background-color: $blue;
+    border: 1px solid $blue;
 }
 
 /* articles */
@@ -199,7 +199,7 @@ p{
 }
 
 .phrases p:first-child{
-    color: #2175ff;
+    color: $blue;
     margin-right: 8px;
 }
 
@@ -319,6 +319,3 @@ p{
 #info-container div i{
     font-size: 24px;
 }
-
-
-
