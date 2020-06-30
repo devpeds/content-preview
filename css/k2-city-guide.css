@@ -196,6 +196,91 @@ p{
     margin-right: 8px;
 }
 
+/* weather */
+.today{
+    margin-right: 24px;
+    margin-left: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.today h1:first-child{
+    margin: 16px;
+    font-size: 56px;
+}
+
+.today h1:nth-child(2){
+    margin: 0;
+}
+
+.today h5{
+    margin: 0;
+}
+
+.today p{
+    margin: 0;
+}
+
+.week{
+    margin-right: 24px;
+    margin-left: 24px;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.weaterCard h3{
+    margin: 0;
+    font-size: 32px;
+}
+
+.weaterCard h5{
+    margin: 8px 0 0 0;
+}
+
+.weaterCard p{
+    margin: 0;
+    font-size: 12px;
+}
+
+.weaterCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#season{
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 24px;
+    padding: 12px 12px 4px 12px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#season div{
+    width: 50%;
+    margin-bottom: 8px;
+    display: flex;
+}
+
+#season div h5{
+    margin: 0 8px 0 4px;
+}
+
+#season div p{
+    margin: 0;
+}
+
+
 /* info */
 #info-container{
     margin-left: 24px;

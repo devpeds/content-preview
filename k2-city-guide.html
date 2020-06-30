@@ -38,6 +38,8 @@
 
                 console.log(baseUrl + parameters.entry + '?access_token=' + parameters.access_token);
 
+                
+
                 //country
                 getCountry(entry.fields.country.sys.id, entry.fields.cityCodeEtp, entry.fields.tagline);
 
@@ -57,7 +59,7 @@
                 // 더보기 버튼 $('#intro').append('<button onclick="#" class="outline"><i class="ri-download-line"></i> 더보기</button>'); 
 
                 //routes
-                $('#routes-tit').append('<h3>한국에서 ' + entry.fields.cityNameKo + '까지</h3>');
+                $('#routes').prepend('<h3>한국에서 ' + entry.fields.cityNameKo + '까지</h3>');
                 $('#routes-list').append('<p>' + entry.fields.routes[0].departure + '</p>');
                 $('#routes-list').append('<p class="box"><i class="ri-plane-line"></i> hh시간 mm분 비행</p>');
                 $('#routes-list').append('<p>' + entry.fields.routes[0].arrival + '</p>');
@@ -96,10 +98,10 @@
                 }
                 $('#routes-list').append('<p>' + entry.fields.landmark.name + '</p>');
             
+                var addDiv;
 
                 //phrases
-                $('#phrases-tit').append('<h3>이 단어만 알아도 현지인</h3>')
-                var addDiv;
+                $('#phrases').prepend('<h3>이 단어만 알아도 현지인</h3>')
                 for (let i=0; i < entry.fields.phrases.length; i++){
                         addDiv = document.createElement('div');
                         addDiv.innerHTML = ('<p>' + entry.fields.phrases[i].key + '</p><p>' + entry.fields.phrases[i].value + '</p>');
@@ -107,8 +109,24 @@
                         $(getPhrases).addClass('phrases');
                 }
 
+                //weather
+                $('#weather').prepend('<h3>오늘의 ' + entry.fields.cityNameKo + '날씨</h3>');
+                var getSeason;
+                for (let i=0; i < entry.fields.specialDates.length; i++){
+                    if(entry.fields.specialDates[i].type === "season"){
+                        addDiv = document.createElement('div');
+                        addDiv.innerHTML = ('<i class="ri-rainy-line"></i><h5>' + entry.fields.specialDates[i].description + '</h5><p>' + entry.fields.specialDates[i].startMonth + '월~' + entry.fields.specialDates[i].endMonth + '월</p>');
+                        getSeason = document.querySelector('#season').appendChild(addDiv);
+                    }
+                    if(entry.fields.specialDates[i].type === "avoidingSeason"){
+                        addDiv = document.createElement('div');
+                        addDiv.innerHTML = ('<i class="ri-cactus-line"></i><h5>' + entry.fields.specialDates[i].description + '</h5><p>' + entry.fields.specialDates[i].startMonth + '월~' + entry.fields.specialDates[i].endMonth + '월</p>');
+                        getSeason = document.querySelector('#season').appendChild(addDiv);
+                    }
+                }
+
                 //info
-                $('#info-tit').append('<h3>' + entry.fields.cityNameKo + '알아가기</h3>')
+                $('#info').prepend('<h3>' + entry.fields.cityNameKo + '알아가기</h3>')
                 $('#info-container').append('<div><i class="ri-translate-2"></i><h4>' + entry.fields.languages[0].mainText + '</h4><p>' + entry.fields.languages[0].subText + '</p></div>');
                 $('#info-container').append('<div><i class="ri-empathize-line"></i><h4>' + '종교' + '</h4><p>' + entry.fields.religions + '</p></div>');
                 if(entry.fields.currencies){
@@ -129,7 +147,7 @@
                 
 
                 //articles
-                $('#articles-tit').append('<h3>' + entry.fields.cityNameKo + ' 언제갈까요?</h3>');
+                $('#articles').prepend('<h3>' + entry.fields.cityNameKo + ' 언제갈까요?</h3>');
                 var slidesCounter = entry.fields.articles.length;
                 var imgUrl;
 
@@ -270,7 +288,6 @@
         <div id='intro'></div>
         <hr>
         <div id='routes'>
-            <div id="routes-tit"></div>
             <div id="routes-con">
                 <div id="routes-line">
                     <div class="dot-box">
@@ -286,17 +303,51 @@
         </div>
         <hr>
         <div id='phrases'>
-            <div id="phrases-tit"></div>
             <div id="phrases-container"></div>
         </div>
         <hr>
+        <div id="weather">
+            <div class="today">
+                <h1>☀️</h1>
+                <h1>24℃</h1>
+                <h5>최저 19℃ - 최고 26 ℃</h5>
+                <p>맑고 화창해요!</p>
+            </div>
+            <div class="week">
+                <div class="weaterCard">
+                    <h3>☀️</h3>
+                    <h5>24℃</h5>
+                    <p>7.1(화)</cp>
+                </div>
+                <div class="weaterCard">
+                    <h3>⛅️</h3>
+                    <h5>24℃</h5>
+                    <p>7.1(화)</cp>
+                </div>
+                <div class="weaterCard">
+                    <h3>☁️</h3>
+                    <h5>24℃</h5>
+                    <p>7.1(화)</cp>
+                </div>
+                <div class="weaterCard">
+                    <h3>🌧</h3>
+                    <h5>24℃</h5>
+                    <p>7.1(화)</cp>
+                </div>
+                <div class="weaterCard">
+                    <h3>☀️</h3>
+                    <h5>24℃</h5>
+                    <p>7.1(화)</cp>
+                </div>
+            </div>
+            <div id="season"></div>
+        </div>
+        <hr>
         <div id="info">
-            <div id="info-tit"></div>
             <div id="info-container"></div>
         </div>
         <hr>
         <div id='articles'>
-            <div id="articles-tit"></div>
             <div class="slide-container">
                 <div class="slide-wrapper"></div>
                 <div id="prev"><i class="ri-arrow-left-s-line"></i></div>
