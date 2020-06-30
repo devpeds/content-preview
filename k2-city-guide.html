@@ -115,12 +115,12 @@
                 for (let i=0; i < entry.fields.specialDates.length; i++){
                     if(entry.fields.specialDates[i].type === "season"){
                         addDiv = document.createElement('div');
-                        addDiv.innerHTML = ('<i class="ri-rainy-line"></i><h5>' + entry.fields.specialDates[i].description + '</h5><p>' + entry.fields.specialDates[i].startMonth + '월~' + entry.fields.specialDates[i].endMonth + '월</p>');
+                        addDiv.innerHTML = ('<i class="ri-pushpin-line"></i><h5>' + entry.fields.specialDates[i].description + '</h5><p>' + entry.fields.specialDates[i].startMonth + '월~' + entry.fields.specialDates[i].endMonth + '월</p>');
                         getSeason = document.querySelector('#season').appendChild(addDiv);
                     }
                     if(entry.fields.specialDates[i].type === "avoidingSeason"){
                         addDiv = document.createElement('div');
-                        addDiv.innerHTML = ('<i class="ri-cactus-line"></i><h5>' + entry.fields.specialDates[i].description + '</h5><p>' + entry.fields.specialDates[i].startMonth + '월~' + entry.fields.specialDates[i].endMonth + '월</p>');
+                        addDiv.innerHTML = ('<i class="ri-pushpin-fill"></i><h5>' + entry.fields.specialDates[i].description + '</h5><p>' + entry.fields.specialDates[i].startMonth + '월~' + entry.fields.specialDates[i].endMonth + '월</p>');
                         getSeason = document.querySelector('#season').appendChild(addDiv);
                     }
                 }
