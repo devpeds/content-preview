@@ -60,8 +60,7 @@
 
                 //routes
                 $('#routes').prepend('<h3>한국에서 ' + entry.fields.cityNameKo + '까지</h3>');
-                $('#routes-list').append('<p>' + entry.fields.routes[0].departure + '</p>');
-                $('#routes-list').append('<p class="box"><i class="ri-plane-line"></i> hh시간 mm분 비행</p>');
+                $('#routes-list').append('<p>' + entry.fields.routes[0].departure + '</p><p class="box"><i class="ri-plane-line"></i> hh시간 mm분 비행</p>');
                 $('#routes-list').append('<p>' + entry.fields.routes[0].arrival + '</p>');
                 switch (entry.fields.landmark.transportation) { 
                     case "Flight":
