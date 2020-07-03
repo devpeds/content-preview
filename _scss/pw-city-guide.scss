@@ -1,3 +1,4 @@
+
 img {
     @include borderR4;
 }
@@ -7,16 +8,21 @@ h3 + h3 {
     margin-top: -24px;
 }
 
+
+// Intro
+#keywords{
+    margin-bottom: 8px;
+
+    p {
+        color: $pwRed;
+    }
+}
+
 small {
     color: $black-38;
     @include body2;
 }
 
-p {
-    color: $black-60;
-}
-
-// Intro
 #cityImage{
     height: 440px;
     width: $w100;
@@ -26,15 +32,6 @@ p {
         object-fit: cover;
         width: $w100;
         @include borderR0;
-    }
-}
-
-#keywords {
-    margin-bottom: 8px;
-
-    p {
-        color: $blue;
-        margin-bottom: 40px;
     }
 }
 
@@ -55,7 +52,7 @@ p {
 
     p {
         &:nth-child(3) {
-            color: $blue;
+            color: $pwRed;
         }
     }
 }
@@ -71,7 +68,6 @@ p {
     background-color: $smoke;
     @include borderR8;
 }
-
 #routes-line{
     width: 14px;
     height: 214px;
@@ -84,11 +80,11 @@ p {
 
 .line{
     width: 1px;
-    height: $w100;
+    height: 100%;
     top: 0;
     margin-left: 3px;
     position: absolute;
-    background-color: $black-12s;
+    background-color: $black-12;
 }
 
 .dot-box{
@@ -105,16 +101,17 @@ p {
     border-radius: 4.5px;
 
     &:first-child, &:last-child{
-        border: 1px solid $black-38;
-        background-color: $white;
+        background-color: $black-87;
+        border: 1px solid $black-87;
     }
 
     &:nth-child(2) {
-        background-color: $blue;
-        border: 1px solid $blue;
+        background-color: $pwRed;
+        border: 1px solid $pwRed;
     }
 }
 
+/* articles */
 /* articles */
 .slide-container{
     position: relative;
@@ -199,7 +196,7 @@ p {
 
         &:first-child {
             margin-right: 8px;
-            color: $blue;
+            color: $pwRed;
         }
     }
 }
@@ -306,3 +303,6 @@ p {
         }
     }
 }
+
+
+

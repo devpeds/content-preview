@@ -21,8 +21,7 @@ html {
  */
 
 body {
-    margin: 0;
-    color: rgba(0, 0, 0, .87);
+    @include margin0;
 }
 
 /**
@@ -115,7 +114,7 @@ samp {
  */
 
 small {
-    font-size: 13px;
+    font-size: 80%;
 }
 
 /**
@@ -355,7 +354,7 @@ body {
 }
 
 a {
-    color: #f63d58;
+    color: $pwRed;
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
@@ -379,12 +378,12 @@ button {
     outline: none;
     border: none;
     border-radius: 4px;
-    background-color: #F63D58;
+    background-color: $pwRed;
     line-height: 56px;
     margin: 24px;
     padding: 0;
     text-align: center;
-    color: #ffffff;
+    color: $white;
     font-weight: bold;
     text-decoration: none;
     width: calc(100% - 48px);
@@ -400,58 +399,55 @@ h1, h2, h3, h4, h5, h6,
 p,
 table,
 ul, ol {
-    margin-left: 24px;
-    margin-right: 24px;
+    @include marginLR;
 }
 
 h1 {
     font-size: 28px;
+    font-weight: normal;
     line-height: 40px;
     margin-top: 40px;
     margin-bottom: 16px;
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 22px;
     line-height: 32px;
-    margin-top: 24px;
+    margin-top: 32px;
     margin-bottom: 16px;
 }
 
 h3 {
+    font-size: 18px;
+    line-height: 26px;
+    margin-top: 48px;
+    margin-bottom: 24px;
+}
+
+h4 {
     font-size: 16px;
     line-height: 26px;
     margin-top: 24px;
     margin-bottom: 16px;
 }
 
-h4 {
-    font-size: 14px;
-    line-height: 26px;
-    margin-top: 24px;
-    margin-bottom: 16px;
-}
-
 h5 {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 24px;
     margin-top: 24px;
     margin-bottom: -8px;
 }
 
-p{
-    font-size: 13px;
-}
-
 hr {
     margin-top: 40px;
+    margin-bottom: 40px;
     border: 0px;
     height: 8px;
-    background-color: rgba(0, 0, 0, .04);
+    background-color: $black-04;
 }
 
 img {
-    width: 100%;
+    width: $w100;
 }
 
 li {
@@ -459,8 +455,7 @@ li {
 }
 
 ol, ul {
-    padding-inline-start: 0;
-    list-style-type: none;
+    padding-left: 24px;
 }
 
 p img {
@@ -481,10 +476,10 @@ table td {
 }
 
 table th {
-    color: #fff;
+    color: $white;
     background-color: #737795;
     border-bottom: none;
-    border-right: 1px solid rgba(0, 0, 0, .12);
+    border-right: 1px solid $black-12;
 }
 
 table th:first-child {
@@ -496,10 +491,10 @@ table th:last-child {
 }
 
 table td {
-    border-right: 1px solid rgba(0, 0, 0, .12);
-    border-bottom: 1px solid rgba(0, 0, 0, .12);
+    border-right: 1px solid $black-12;
+    border-bottom: 1px solid $black-12;
 }
 
 table td:first-child {
-    border-left: 1px solid rgba(0, 0, 0, .12);
+    border-left: 1px solid $black-12;
 }

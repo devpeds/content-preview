@@ -1,0 +1,98 @@
+img {
+    @include borderR4;
+    margin-bottom: 16px;
+}
+
+h2 {
+    margin-top: 32px;
+}
+
+h3 {
+    margin-top: 40px;
+}
+
+h4 {
+    margin-bottom: 0;
+}
+
+h5 {
+    margin-top: 8px;
+}
+
+h1 + h1,
+h2 + h2,
+h3 + h3 {
+    margin-top: -24px;
+}
+
+small {
+    @include body2;
+    color: $black-38;
+    margin-bottom: 8px;
+}
+
+p {
+    color: $black-60;
+}
+
+em {
+    text-align: center;
+    font-size: 14px;
+    font-style: italic;
+
+    &::before {
+        content: url('https://res.cloudinary.com/kyte/image/authenticated/s--FvVLAOVd--/v1593743256/web/double-quotes-l.svg');
+        opacity: .3;
+        display: block;
+        height: 24px;
+        margin-bottom: 8px;
+    }
+
+    &::after {
+        content: url('https://res.cloudinary.com/kyte/image/authenticated/s--CP6SjiI6--/v1593743256/web/double-quotes-r.svg');
+        opacity: .3;
+        display: block;
+        height: 24px;
+        margin-top: 8px;
+    }
+}
+
+blockquote {
+    p {
+        margin: 0;
+        border-left: 3px solid $black-12;
+        padding-left: 8px;
+    }
+}
+
+ul {
+    background-color: $lgray;
+    color: $black-60;
+    padding: 8px 12px;
+    @include borderR4;
+
+    li {
+        strong {
+            margin-right: 8px;
+            color: $black-87;
+        }   
+    }
+}
+
+// Intro
+#topImage {
+    width: $w100;
+    height: 440px;
+
+    img {
+        height: 440px;
+        object-fit: cover;
+        width: $w100;
+        @include borderR0;
+    }
+}
+
+#title {
+    margin-bottom: 32px;
+}
+

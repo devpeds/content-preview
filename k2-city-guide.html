@@ -2,15 +2,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/k2-default.css">
-    <link rel="stylesheet" href="css/preview.css">
     <link rel="stylesheet" href="css/k2-city-guide.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
-
-    <script src="https://unpkg.com/swiper/js/swiper.js"></script>
-    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.4/gsap.min.js"></script>
@@ -39,7 +32,7 @@
                 getEntries(entry.sys.contentType.sys.id);
 
                 //country
-                getCountry(fields.country.sys.id, fields.cityCodeEtp, fields.tagline);
+                getCountry(fields.country.sys.id, fields.cityCodeEtp, fields.cityNameKo);
 
                 //keyword
                 $('#keywords').append('<p></p>');
@@ -48,11 +41,8 @@
                     $('#keywords').children('p').append('#' + keywords[i] + ' ');
                 }
 
-                //metaDescription
-                $('#metaDescription').append('<p>' + fields.metaDescription + '</p>');
-
                 //intro
-                $('#intro').append('<h3>' + fields.cityNameKo + ' 소개</h3>');
+                $('#intro').append('<h3>' + fields.tagline + '</h3>');
                 $('#intro').append(md.render(fields.intro));
                 // 더보기 버튼 $('#intro').append('<button onclick="#" class="outline"><i class="ri-download-line"></i> 더보기</button>'); 
 
@@ -182,7 +172,7 @@
                         prev.classList.remove('disabled');
                     } 
                     
-                    if (currentIndex == slideCount - 1){
+                    if (currentIndex == slides.length - 1){
                         next.classList.add('disabled');
                     } else {
                         next.classList.remove('disabled');
@@ -201,7 +191,7 @@
             });
 
         //Get country
-        function getCountry(entryId, cityCodeEtp, tagline) {
+        function getCountry(entryId, cityCodeEtp, cityNameKo) {
             fetch(baseUrl + entryId + '?access_token=' + parameters.access_token)
                 .then(response => response.json())
                 .then(function (entry) {
@@ -210,8 +200,8 @@
                     //cityImage
                     $('#cityImage').append('<img src=https://res.cloudinary.com/kyte/image/upload/IATA/locations/' + entry.fields.code + '/' + cityCodeEtp + '_0.jpg>');
 
-                    //tagline
-                    $('#tagline').append('<h2><small>' + entry.fields.nameKo + '</small></h2>' + '<h2>' + tagline + '</h2>');
+                    $('#tagline').append('<h2><small>' + entry.fields.nameKo + '</small></h2>' + '<h2>' + cityNameKo + '</h2>');
+
                 });
         }
 
@@ -262,8 +252,6 @@
         <div id='cityImage'></div>
         <div id='tagline'></div>
         <div id='keywords'></div>
-        <div id='metaDescription'></div>
-        <hr>
         <div id='intro'></div>
         <hr>
         <div id='routes'>

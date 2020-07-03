@@ -2,8 +2,6 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/pw-default.css">
-    <link rel="stylesheet" href="css/preview.css">
     <link rel="stylesheet" href="css/pw-city-guide.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
 
@@ -42,9 +40,6 @@
                 for (let i = 0; i < keywords.length; i++) {
                     $('#keywords').children('p').append('#' + keywords[i] + ' ');
                 }
-
-                //metaDescription
-                $('#metaDescription').append('<p>' + fields.metaDescription + '</p>');
 
                 //intro
                 $('#intro').append('<h3>' + fields.tagline + ' 소개</h3>');
@@ -257,8 +252,6 @@
         <div id='cityImage'></div>
         <div id='tagline'></div>
         <div id='keywords'></div>
-        <div id='metaDescription'></div>
-        <hr>
         <div id='intro'></div>
         <hr>
         <div id='routes'>
