@@ -39,6 +39,7 @@ em {
     text-align: center;
     font-size: 14px;
     font-style: italic;
+    @include flexColCen;
 
     &::before {
         content: url('https://res.cloudinary.com/kyte/image/authenticated/s--FvVLAOVd--/v1593743256/web/double-quotes-l.svg');
