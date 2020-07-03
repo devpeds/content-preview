@@ -95,5 +95,9 @@ ul {
 
 #title {
     margin-bottom: 32px;
+
+    p {
+        @include body1;
+    }
 }
 
