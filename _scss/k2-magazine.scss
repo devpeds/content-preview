@@ -39,6 +39,7 @@ em {
     text-align: center;
     font-size: 14px;
     font-style: italic;
+    line-height: 20px;
     @include flexColCen;
 
     &::before {
@@ -96,8 +97,10 @@ ul {
 #title {
     margin-bottom: 32px;
 
-    p {
+    h2 {
         @include body1;
+        color: $black-60;
+        margin-top: 0;
     }
 }
 
