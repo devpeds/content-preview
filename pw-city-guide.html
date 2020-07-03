@@ -42,7 +42,7 @@
                 }
 
                 //intro
-                $('#intro').append('<h3>' + fields.tagline + ' 소개</h3>');
+                $('#intro').append('<h2>' + fields.tagline + ' 소개</h2>');
                 $('#intro').append(md.render(fields.intro));
                 // 더보기 버튼 $('#intro').append('<button onclick="#" class="outline"><i class="ri-download-line"></i> 더보기</button>'); 
 
@@ -201,7 +201,7 @@
                     $('#cityImage').append('<img src=https://res.cloudinary.com/kyte/image/upload/IATA/locations/' + entry.fields.code + '/' + cityCodeEtp + '_0.jpg>');
 
                     //tagline
-                    $('#tagline').append('<h2><small>' + entry.fields.nameKo + '</small></h2>' + '<h2>' + cityNameKo + '</h2>');
+                    $('#tagline').append('<h1><small>' + entry.fields.nameKo + '</small></h1>' + '<h1>' + cityNameKo + '</h1>');
                 });
         }
 
