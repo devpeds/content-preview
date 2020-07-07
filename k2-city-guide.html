@@ -13,7 +13,7 @@
     <script>
         const parameters = getParameters();
         const baseUrl = 'https://preview.contentful.com/spaces/' + parameters.space + '/entries/';
-
+        
         let md;
         require(['https://cdnjs.cloudflare.com/ajax/libs/remarkable/2.0.1/remarkable.min.js'], function (remarkable) {
             md = new remarkable.Remarkable({
@@ -27,6 +27,7 @@
             .then(response => response.json())
             .then(function (entry) {
                 const fields = entry.fields;
+
 
                 console.log(baseUrl + parameters.entry + '?access_token=' + parameters.access_token);
                 getEntries(entry.sys.contentType.sys.id);
@@ -107,21 +108,52 @@
                 $('#info').prepend('<h3>' + fields.cityNameKo + ' 알아가기</h3>')
                 $('#info-container').append('<div><i class="ri-translate-2"></i><h4>' + fields.languages[0].mainText + '</h4><p>' + fields.languages[0].subText + '</p></div>');
                 $('#info-container').append('<div><i class="ri-empathize-line"></i><h4>' + '종교' + '</h4><p>' + fields.religions + '</p></div>');
-                if (fields.currencies){
-                    $('#info-container').append('<div><i class="ri-money-dollar-circle-line"></i><h4>' + '통화' + '</h4><p>' + fields.currencies + '</p></div>');
-                };
-                if (fields.electricity){
-                    $('#info-container').append('<div><i class="ri-plug-line"></i><h4>' + '전압' + '</h4><p>' + fields.electricity + '</p></div>');
-                };
-                if (fields.tipping){
-                    $('#info-container').append('<div><i class="ri-hand-coin-line"></i><h4>' + '팁 문화' + '</h4><p>' + fields.tipping + '</p></div>');
-                };
-                if (fields.visa){
-                    $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + '비자' + '</h4><p>' + fields.visa + '</p></div>');
-                };
-                if (fields.callingCode){
-                    $('#info-container').append('<div><i class="ri-phone-line"></i><h4>' + '국가번호' + '</h4><p>' + fields.callingCode + '</p></div>');
-                };
+                
+                fetch(baseUrl + fields.country.sys.id + '?access_token=' + parameters.access_token)
+                    .then(function(response) {return response.json();})
+                    .then(function(entry) {
+                        const countryCurrencies = entry.fields.currencies;
+                        const countryElectricity = entry.fields.electricity;
+                        const countryTipping = entry.fields.tipping;
+                        const countryVisa = entry.fields.visa;
+
+                        if (fields.currencies){
+                            $('#info-container').append('<div><i class="ri-money-dollar-circle-line"></i><h4>' + '통화' + '</h4><p>' + fields.currencies + '</p></div>');
+                        } else {
+                            if (countryCurrencies){
+                                $('#info-container').append('<div><i class="ri-money-dollar-circle-line"></i><h4>' + '통화' + '</h4><p>' + countryCurrencies + '</p></div>');
+                            };
+                        }
+
+                        if (fields.electricity){
+                            $('#info-container').append('<div><i class="ri-plug-line"></i><h4>' + '전압' + '</h4><p>' + fields.electricity + '</p></div>');
+                        } else {
+                            if (countryElectricity){
+                                $('#info-container').append('<div><i class="ri-plug-line"></i><h4>' + '전압' + '</h4><p>' + countryElectricity + '</p></div>');
+                            };
+                        }
+
+                        if (fields.tipping){
+                            $('#info-container').append('<div><i class="ri-hand-coin-line"></i><h4>' + '팁 문화' + '</h4><p>' + fields.tipping + '</p></div>');
+                        } else {
+                            if (countryTipping){
+                                $('#info-container').append('<div><i class="ri-hand-coin-line"></i><h4>' + '팁 문화' + '</h4><p>' + countryTipping + '</p></div>');
+                            };
+                        }
+
+                        if (fields.visa){
+                            $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + '비자' + '</h4><p>' + fields.visa + '</p></div>');
+                        } else {
+                            if (countryVisa){
+                                $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + '비자' + '</h4><p>' + countryVisa + '</p></div>');
+                            };
+                        }
+
+                        if (fields.callingCode){
+                            $('#info-container').append('<div><i class="ri-phone-line"></i><h4>' + '국가번호' + '</h4><p>' + fields.callingCode + '</p></div>');
+                        };
+                        
+                });
 
                 //articles
                 $('#articles').prepend('<h3>' + fields.cityNameKo + ' 언제갈까요?</h3>');
@@ -188,6 +220,7 @@
                 })
 
                 moveSlide(0);
+
             });
 
         //Get country
@@ -213,6 +246,7 @@
                     entries.includes.Entry.forEach(function (item) {
                         $('#nav').append('<li id="' + item.sys.id + '"><a href="#">' + item.fields.nameKo + '</a><ul></ul></li>');
                     });
+
 
                     let category;
                     let style;
@@ -274,39 +308,6 @@
         </div>
         <hr>
         <div id="weather">
-            <div class="today">
-                <h1>☀️</h1>
-                <h1>24℃</h1>
-                <h5>최저 19℃ - 최고 26 ℃</h5>
-                <p>맑고 화창해요!</p>
-            </div>
-            <div class="week">
-                <div class="weaterCard">
-                    <h3>☀️</h3>
-                    <h5>24℃</h5>
-                    <p>7.1(화)</cp>
-                </div>
-                <div class="weaterCard">
-                    <h3>⛅️</h3>
-                    <h5>24℃</h5>
-                    <p>7.1(화)</cp>
-                </div>
-                <div class="weaterCard">
-                    <h3>☁️</h3>
-                    <h5>24℃</h5>
-                    <p>7.1(화)</cp>
-                </div>
-                <div class="weaterCard">
-                    <h3>🌧</h3>
-                    <h5>24℃</h5>
-                    <p>7.1(화)</cp>
-                </div>
-                <div class="weaterCard">
-                    <h3>☀️</h3>
-                    <h5>24℃</h5>
-                    <p>7.1(화)</cp>
-                </div>
-            </div>
             <div id="season"></div>
         </div>
         <hr>
