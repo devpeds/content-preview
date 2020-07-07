@@ -4,7 +4,7 @@
 }
 
 #nav {
-    max-width: 280px;
+    max-width: 320px;
     float: left;
     top: 0;
     bottom:0;
@@ -16,87 +16,82 @@
     list-style: none;
 }
 
-#nav ul {
-    padding: 0;
-    margin: 8px 0 0 0;
-}
+#nav {
+    ul {
+        padding: 0 24px 0 0;
+        margin: 8px 0 0 0;
 
-#nav ul > li.active > a {
-    color: #f63d58;
-}
+        li {
+            margin: 16px 0;
 
-#nav li a {
-    color: rgba(0, 0, 0, .6);
-    font-size: 14px;
-    line-height: 18px;
-}
+            a {
+                color: $black-60;
+                margin-bottom: 8px;
+                @include subtitle2;
 
-#nav > li {
-    margin: 16px 0;
-}
+                &:after {
+                    content: '';
+                    display: inline-block;
+                    margin: 0 0 0 8px;
+                    width: 4px;
+                    height: 4px;
+                    border-right: 2px solid $black-60;
+                    border-bottom: 2px solid $black-60;
+                    -webkit-transform: rotate(-135deg) !important;
+                    -moz-transform: rotate(-135deg) !important;
+                    -o-transform: rotate(-135deg) !important;
+                    transform: rotate(-135deg) !important;
+                    -webkit-transition: .25s ease-out !important;
+                    -moz-transition: .25s ease-out !important;
+                    -o-transition: .25s ease-out !important;
+                    transition: .25s ease-out !important;
+                }
+            }
 
-#nav > li > a {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
+            .active > a {
+                color: $pwRed;
 
-#nav > li.active > a {
-    color: #f63d58;
-}
+                &:after {
+                    border-right: 2px solid $pwRed !important;
+                    border-bottom: 2px solid $pwRed !important;
+                }
+            }
 
-#nav > li.active > a:after {
-    border-right: 2px solid #f63d58 !important;
-    border-bottom: 2px solid #f63d58 !important;
-}
-
-#nav > li.open > a:after {
-    content: '';
-    display: inline-block;
-    margin: 0 0 2px 8px;
-    width: 4px;
-    height: 4px;
-    border-right: 2px solid rgba(0, 0, 0, .6);
-    border-bottom: 2px solid rgba(0, 0, 0, .6);
-    -webkit-transform: rotate(45deg) !important;
-    -moz-transform: rotate(45deg) !important;
-    -o-transform: rotate(45deg) !important;
-    transform: rotate(45deg) !important;
-    -webkit-transition: .25s ease-out !important;
-    -moz-transition: .25s ease-out !important;
-    -o-transition: .25s ease-out !important;
-    transition: .25s ease-out !important;
-}
-
-#nav > li > a:after {
-    content: '';
-    display: inline-block;
-    margin: 0 0 0 8px;
-    width: 4px;
-    height: 4px;
-    border-right: 2px solid rgba(0, 0, 0, .6);
-    border-bottom: 2px solid rgba(0, 0, 0, .6);
-    -webkit-transform: rotate(-135deg) !important;
-    -moz-transform: rotate(-135deg) !important;
-    -o-transform: rotate(-135deg) !important;
-    transform: rotate(-135deg) !important;
-    -webkit-transition: .25s ease-out !important;
-    -moz-transition: .25s ease-out !important;
-    -o-transition: .25s ease-out !important;
-    transition: .25s ease-out !important;
+            .open > a {
+                &:after {
+                    content: '';
+                    display: inline-block;
+                    margin: 0 0 2px 8px;
+                    width: 4px;
+                    height: 4px;
+                    border-right: 2px solid $black-60;
+                    border-bottom: 2px solid $black-60;
+                    -webkit-transform: rotate(45deg) !important;
+                    -moz-transform: rotate(45deg) !important;
+                    -o-transform: rotate(45deg) !important;
+                    transform: rotate(45deg) !important;
+                    -webkit-transition: .25s ease-out !important;
+                    -moz-transition: .25s ease-out !important;
+                    -o-transition: .25s ease-out !important;
+                    transition: .25s ease-out !important;
+                }
+            }
+        }
 }
 
 #content {
     max-width: 360px;
     float: right;
-}
 
-#content > p:first-child {
-    margin: 0;
-}
+    p {
+        &:first-child {
+            @include margin0;
 
-#content > p:first-child img {
-    margin-top: 0;
-    margin-bottom: 16px;
-    border-radius: 0;
+            img {
+                margin-top: 0;
+                margin-bottom: 16px;
+                border-radius: 0;
+            }
+        }
+    }
 }
