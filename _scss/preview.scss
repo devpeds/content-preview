@@ -4,51 +4,48 @@
 }
 
 #nav {
-    max-width: 320px;
+    max-width: 280px;
+    min-width: 200px;
     float: left;
     top: 0;
     bottom:0;
     position: fixed;
     overflow-y:scroll;
-}
 
-#nav, #nav ul, #nav li {
-    list-style: none;
-}
+    > li {
+        > a {
+            &:after {
+                content: '';
+                display: inline-block;
+                margin: 0 0 2px 8px;
+                width: 4px;
+                height: 4px;
+                border-right: 2px solid $black-60;
+                border-bottom: 2px solid $black-60;
+                -webkit-transform: rotate(45deg) !important;
+                -moz-transform: rotate(45deg) !important;
+                -o-transform: rotate(45deg) !important;
+                transform: rotate(45deg) !important;
+                -webkit-transition: .25s ease-out !important;
+                -moz-transition: .25s ease-out !important;
+                -o-transition: .25s ease-out !important;
+                transition: .25s ease-out !important;
+            }
+        }
 
-#nav {
-    ul {
-        padding: 0 24px 0 0;
-        margin: 8px 0 0 0;
-
-        li {
-            margin: 16px 0;
+        > ul {
+            padding: 0 24px 0 0;
+            margin: 8px 0 16px 8px;
 
             a {
                 color: $black-60;
                 margin-bottom: 8px;
-                @include subtitle2;
-
-                &:after {
-                    content: '';
-                    display: inline-block;
-                    margin: 0 0 0 8px;
-                    width: 4px;
-                    height: 4px;
-                    border-right: 2px solid $black-60;
-                    border-bottom: 2px solid $black-60;
-                    -webkit-transform: rotate(-135deg) !important;
-                    -moz-transform: rotate(-135deg) !important;
-                    -o-transform: rotate(-135deg) !important;
-                    transform: rotate(-135deg) !important;
-                    -webkit-transition: .25s ease-out !important;
-                    -moz-transition: .25s ease-out !important;
-                    -o-transition: .25s ease-out !important;
-                    transition: .25s ease-out !important;
-                }
+                @include body2;
             }
+        }
 
-            .active > a {
+        .active {
+            > a {
                 color: $pwRed;
 
                 &:after {
@@ -56,28 +53,34 @@
                     border-bottom: 2px solid $pwRed !important;
                 }
             }
+        }
+    }
 
-            .open > a {
-                &:after {
-                    content: '';
-                    display: inline-block;
-                    margin: 0 0 2px 8px;
-                    width: 4px;
-                    height: 4px;
-                    border-right: 2px solid $black-60;
-                    border-bottom: 2px solid $black-60;
-                    -webkit-transform: rotate(45deg) !important;
-                    -moz-transform: rotate(45deg) !important;
-                    -o-transform: rotate(45deg) !important;
-                    transform: rotate(45deg) !important;
-                    -webkit-transition: .25s ease-out !important;
-                    -moz-transition: .25s ease-out !important;
-                    -o-transition: .25s ease-out !important;
-                    transition: .25s ease-out !important;
-                }
+    .open {
+        > a {
+            &:after {
+                content: '';
+                display: inline-block;
+                margin: 0 0 2px 8px;
+                width: 4px;
+                height: 4px;
+                border-right: 2px solid $black-60;
+                border-bottom: 2px solid $black-60;
+                -webkit-transform: rotate(-135deg) !important;
+                -moz-transform: rotate(-135deg) !important;
+                -o-transform: rotate(-135deg) !important;
+                transform: rotate(-135deg) !important;
+                -webkit-transition: .25s ease-out !important;
+                -moz-transition: .25s ease-out !important;
+                -o-transition: .25s ease-out !important;
+                transition: .25s ease-out !important;
             }
         }
     }
+}
+
+#nav, #nav ul, #nav li {
+    list-style: none;
 }
 
 #content {
