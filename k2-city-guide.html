@@ -145,7 +145,7 @@
                             $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + '비자' + '</h4><p>' + fields.visa + '</p></div>');
                         } else {
                             if (countryVisa){
-                                $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + '비자' + '</h4><p>' + countryVisa + '</p></div>');
+                                $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + countryVisa[0].mainText + '</h4><p>' + countryVisa[0].subText + '</p></div>');
                             };
                         }
 
