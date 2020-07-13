@@ -184,63 +184,83 @@
                 //special days
                 $('#special-days').prepend('<h3>' + fields.cityNameKo + '만의 스페셜데이</h3>');
                 const specialDates = fields.specialDates;
-                
-                for (let i = 0; i < specialDates.length; i++){
-                    if (specialDates[i].type == 'festival'){
-                        $('#special-days').append('<div class="row-1"><div class="col-1"><i class="ri-music-2-line"></i><p>페스티벌</p></div><div class="col-2"><h4>' + specialDates[i].description + '</h4><p class="date">' + specialDates[i].startMonth + '월 </p></div>');
-                        if (specialDates[i].startDay) {
-                            $('.date').append(specialDates[i].startDay + '일');
+                let specialDate;
+                let html;
+
+                for (let i = 0; i < specialDates.length; i++) {
+                    specialDate = specialDates[i];
+                    if (specialDate.type == 'festival') {
+                        html = '<div class="row-1"><div class="col-1"><i class="ri-music-2-line"></i><p>페스티벌</p></div><div class="col-2"><h4>' + specialDate.description + '</h4><p>' + specialDate.startMonth + '월 ';
+                        
+                        if (specialDate.startDay) {
+                            html += specialDate.startDay + '일';
                         }
-                        if (specialDates[i].endMonth) {
-                            $('.date').append(' ~ ' + specialDates[i].endMonth + '월 ');
+                        
+                        if (specialDate.endMonth) {
+                            html += ' ~ ' + specialDate.endMonth + '월 ';
                         }
-                        if (specialDates[i].endDay) {
-                            $('.date').append(specialDates[i].endDay + '일');
+                        
+                        if (specialDate.endDay) {
+                            html += specialDate.endDay + '일';
                         }
+
+                        $('#special-days').append(html + '</p></div>');
                     }
 
-                    if (specialDates[i].type == 'event'){
-                        $('#special-days').append('<div class="row-1"><div class="col-1"><i class="ri-magic-line"></i><p>이벤트</p></div><div class="col-2"><h4>' + specialDates[i].description + '</h4><p class="date">' + specialDates[i].startMonth + '월 </p></div>');
-                        if (specialDates[i].startDay) {
-                            $('.date').append(specialDates[i].startDay + '일');
+                    if (specialDate.type == 'event') {
+                        html = '<div class="row-1"><div class="col-1"><i class="ri-magic-line"></i><p>이벤트</p></div><div class="col-2"><h4>' + specialDate.description + '</h4><p>' + specialDate.startMonth + '월 ';
+                        
+                        if (specialDate.startDay) {
+                            html += specialDate.startDay + '일';
                         }
-                        if (specialDates[i].endMonth) {
-                            $('.date').append(' ~ ' + specialDates[i].endMonth + '월 ');
+                        
+                        if (specialDate.endMonth) {
+                            html += ' ~ ' + specialDate.endMonth + '월 ';
                         }
-                        if (specialDates[i].endDay) {
-                            $('.date').append(specialDates[i].endDay + '일');
+                        
+                        if (specialDate.endDay) {
+                            html += specialDate.endDay + '일';
                         }
+
+                        $('#special-days').append(html + '</p></div>');
                     }
 
-                    if (specialDates[i].type == 'holiday'){
-                        $('#special-days').append('<div class="row-1"><div class="col-1"><i class="ri-hearts-line"></i><p>명절</p></div><div class="col-2"><h4>' + specialDates[i].description + '</h4><p class="date">' + specialDates[i].startMonth + '월 </p></div>');
-                        if (specialDates[i].startDay) {
-                            $('.date').append(specialDates[i].startDay + '일');
+                    if (specialDate.type == 'holiday') {
+                        html = '<div class="row-1"><div class="col-1"><i class="ri-hearts-line"></i><p>명절</p></div><div class="col-2"><h4>' + specialDate.description + '</h4><p>' + specialDate.startMonth + '월 ';
+                        
+                        if (specialDate.startDay) {
+                            html += specialDate.startDay + '일';
                         }
-                        if (specialDates[i].endMonth) {
-                            $('.date').append(' ~ ' + specialDates[i].endMonth + '월 ');
+                        
+                        if (specialDate.endMonth) {
+                            html += ' ~ ' + specialDate.endMonth + '월 ';
                         }
-                        if (specialDates[i].endDay) {
-                            $('.date').append(specialDates[i].endDay + '일');
+                        
+                        if (specialDate.endDay) {
+                            html += specialDate.endDay + '일';
                         }
+
+                        $('#special-days').append(html + '</p></div>');
                     }
 
-                    if (specialDates[i].type == 'avoidingSeason'){
-                        $('#special-days').append('<div class="row-1"><div class="col-1"><i class="ri-thumb-down-line"></i><p class="avoid">비추천기간</p></div><div class="col-2"><h4>' + specialDates[i].description + '</h4><p class="date">' + specialDates[i].startMonth + '월 </p></div>');
-                        if (specialDates[i].startDay) {
-                            $('.date').append(specialDates[i].startDay + '일');
+                    if (specialDate.type == 'avoidingSeason') {
+                        html = '<div class="row-1"><div class="col-1"><i class="ri-thumb-down-line"></i><p class="avoid">비추천기간</p></div><div class="col-2"><h4>' + specialDate.description + '</h4><p>' + specialDate.startMonth + '월 ';
+                        
+                        if (specialDate.startDay) {
+                            html += specialDate.startDay + '일';
                         }
-                        if (specialDates[i].endMonth) {
-                            $('.date').append(' ~ ' + specialDates[i].endMonth + '월 ');
+                        
+                        if (specialDate.endMonth) {
+                            html += ' ~ ' + specialDate.endMonth + '월 ';
                         }
-                        if (specialDates[i].endDay) {
-                            $('.date').append(specialDates[i].endDay + '일');
+                        
+                        if (specialDate.endDay) {
+                            html += specialDate.endDay + '일';
                         }
+
+                        $('#special-days').append(html + '</p></div>');
                     }
-                    
                 }
-                
-
 
                 //articles
                 $('#articles').prepend('<h3>' + fields.cityNameKo + ' 언제갈까요?</h3>');
