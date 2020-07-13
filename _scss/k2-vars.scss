@@ -73,12 +73,25 @@ $w100: 100%;
     flex-direction: column;
     align-items: flex-start;
 }
+@mixin flexRowStart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
 @mixin flexRowAround {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
 }
+@mixin flexRowBetween {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
 @mixin disNone {
     display: none;
 }

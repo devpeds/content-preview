@@ -35,6 +35,11 @@
                 //country
                 getCountry(fields.country.sys.id, fields.cityCodeEtp, fields.cityNameKo);
 
+                //cityGuide
+                if (entry.sys.contentType.sys.id == "cityGuide") {
+                    $('#cityImage').append('<div class="titleBadge">도시가이드</div>')
+                }
+
                 //keyword
                 $('#keywords').append('<p></p>');
                 const keywords = fields.keywords.split(', ');
@@ -91,23 +96,44 @@
                 $('#phrases').prepend('<h3>이 단어만 알아도 현지인</h3>')
                 for (let i = 0; i < fields.phrases.length; i++){
                     $('#phrases-container').append('<div class="phrases"><p>' + fields.phrases[i].key + '</p><p>' + fields.phrases[i].value + '</p></div>');
+                } 
+
+                //season
+                $('#season').prepend('<h3>' + fields.cityNameKo + ' 여행하기 좋은 계절은?</h3>');
+
+                let graphBar = document.getElementsByClassName('graph-bar');
+                let today = new Date();
+                let month = today.getMonth();
+
+                for (let i = 0; i < 12; i++){
+                    if (i == month) {
+                        $('#chart').append('<div class="graph-bar thisMonth"></div>');
+                    } else {
+                        $('#chart').append('<div class="graph-bar"></div>');
+                    }
+                    $('#graph-label').append('<p>' + (i + 1) + '월</p>');
                 }
 
-                //weather
-                $('#weather').prepend('<h3>오늘의 ' + fields.cityNameKo + '날씨</h3>');
+                $('.graph-bar').each(function() {
+                    var h = Math.floor(Math.random() * 60) + 30;
+                    $(this).css("height", h);
+                });
+                $('#season').append('<p>4계절이 뚜렷한 런던은 여름은 덥고 습하며, 겨울은 우리나라와 비슷한 정도로 춥다. 봄인 4~5월이 쾌적하고 온화한 날씨로 여행하기 좋다.</p>')
+
                 for (let i = 0; i < fields.specialDates.length; i++){
                     if (fields.specialDates[i].type === "season"){
-                        $('#season').append('<div><i class="ri-pushpin-line"></i><h5>' + fields.specialDates[i].description + '</h5><p>' + fields.specialDates[i].startMonth + '월~' + fields.specialDates[i].endMonth + '월</p></div>');
+                        $('#season-container').append('<div class="season-box"><i class="ri-pushpin-line"></i><h5>' + fields.specialDates[i].description + '</h5><p>' + fields.specialDates[i].startMonth + '월~' + fields.specialDates[i].endMonth + '월</p></div>');
                     }
                     if (entry.fields.specialDates[i].type === "avoidingSeason"){
-                        $('#season').append('<div><i class="ri-pushpin-fill"></i><h5>' + fields.specialDates[i].description + '</h5><p>' + fields.specialDates[i].startMonth + '월~' + fields.specialDates[i].endMonth + '월</p></div>');
+                        $('#season-container').append('<div class="season-box"><i class="ri-pushpin-fill"></i><h5>' + fields.specialDates[i].description + '</h5><p>' + fields.specialDates[i].startMonth + '월~' + fields.specialDates[i].endMonth + '월</p></div>');
                     }
                 }
-
+                
                 //info
                 $('#info').prepend('<h3>' + fields.cityNameKo + ' 알아가기</h3>')
                 $('#info-container').append('<div><i class="ri-translate-2"></i><h4>' + fields.languages[0].mainText + '</h4><p>' + fields.languages[0].subText + '</p></div>');
                 $('#info-container').append('<div><i class="ri-empathize-line"></i><h4>' + '종교' + '</h4><p>' + fields.religions + '</p></div>');
+                $('#info-container').append('<div><i class="ri-hotel-bed-line"></i><h4>' + '추천 체류기간' + '</h4><p>' + fields.recommendedStayDuration[0].days + '박 ' + fields.recommendedStayDuration[0].nights + '일</p></div>');
                 
                 fetch(baseUrl + fields.country.sys.id + '?access_token=' + parameters.access_token)
                     .then(function(response) {return response.json();})
@@ -145,7 +171,7 @@
                             $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + '비자' + '</h4><p>' + fields.visa + '</p></div>');
                         } else {
                             if (countryVisa){
-                                $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + countryVisa[0].mainText + '</h4><p>' + countryVisa[0].subText + '</p></div>');
+                                $('#info-container').append('<div><i class="ri-global-line"></i><h4>' + countryVisa[0].mainText + '</h4><p>' + countryVisa[0].subText + '</p></div>'); // Required Field라 채워져 있어야 함
                             };
                         }
 
@@ -154,6 +180,67 @@
                         };
                         
                 });
+
+                //special days
+                $('#special-days').prepend('<h3>' + fields.cityNameKo + '만의 스페셜데이</h3>');
+                const specialDates = fields.specialDates;
+                
+                for (let i = 0; i < specialDates.length; i++){
+                    if (specialDates[i].type == 'festival'){
+                        $('#special-days').append('<div class="row-1"><div class="col-1"><i class="ri-music-2-line"></i><p>페스티벌</p></div><div class="col-2"><h4>' + specialDates[i].description + '</h4><p class="date">' + specialDates[i].startMonth + '월 </p></div>');
+                        if (specialDates[i].startDay) {
+                            $('.date').append(specialDates[i].startDay + '일');
+                        }
+                        if (specialDates[i].endMonth) {
+                            $('.date').append(' ~ ' + specialDates[i].endMonth + '월 ');
+                        }
+                        if (specialDates[i].endDay) {
+                            $('.date').append(specialDates[i].endDay + '일');
+                        }
+                    }
+
+                    if (specialDates[i].type == 'event'){
+                        $('#special-days').append('<div class="row-1"><div class="col-1"><i class="ri-magic-line"></i><p>이벤트</p></div><div class="col-2"><h4>' + specialDates[i].description + '</h4><p class="date">' + specialDates[i].startMonth + '월 </p></div>');
+                        if (specialDates[i].startDay) {
+                            $('.date').append(specialDates[i].startDay + '일');
+                        }
+                        if (specialDates[i].endMonth) {
+                            $('.date').append(' ~ ' + specialDates[i].endMonth + '월 ');
+                        }
+                        if (specialDates[i].endDay) {
+                            $('.date').append(specialDates[i].endDay + '일');
+                        }
+                    }
+
+                    if (specialDates[i].type == 'holiday'){
+                        $('#special-days').append('<div class="row-1"><div class="col-1"><i class="ri-hearts-line"></i><p>명절</p></div><div class="col-2"><h4>' + specialDates[i].description + '</h4><p class="date">' + specialDates[i].startMonth + '월 </p></div>');
+                        if (specialDates[i].startDay) {
+                            $('.date').append(specialDates[i].startDay + '일');
+                        }
+                        if (specialDates[i].endMonth) {
+                            $('.date').append(' ~ ' + specialDates[i].endMonth + '월 ');
+                        }
+                        if (specialDates[i].endDay) {
+                            $('.date').append(specialDates[i].endDay + '일');
+                        }
+                    }
+
+                    if (specialDates[i].type == 'avoidingSeason'){
+                        $('#special-days').append('<div class="row-1"><div class="col-1"><i class="ri-thumb-down-line"></i><p class="avoid">비추천기간</p></div><div class="col-2"><h4>' + specialDates[i].description + '</h4><p class="date">' + specialDates[i].startMonth + '월 </p></div>');
+                        if (specialDates[i].startDay) {
+                            $('.date').append(specialDates[i].startDay + '일');
+                        }
+                        if (specialDates[i].endMonth) {
+                            $('.date').append(' ~ ' + specialDates[i].endMonth + '월 ');
+                        }
+                        if (specialDates[i].endDay) {
+                            $('.date').append(specialDates[i].endDay + '일');
+                        }
+                    }
+                    
+                }
+                
+
 
                 //articles
                 $('#articles').prepend('<h3>' + fields.cityNameKo + ' 언제갈까요?</h3>');
@@ -233,7 +320,7 @@
                     //cityImage
                     $('#cityImage').append('<img src=https://res.cloudinary.com/kyte/image/upload/IATA/locations/' + entry.fields.code + '/' + cityCodeEtp + '_0.jpg>');
 
-                    $('#tagline').append('<h1><small>' + entry.fields.nameKo + '</small></h1>' + '<h1>' + cityNameKo + '</h1>');
+                    $('#cityTitle').append('<h1><small>' + entry.fields.nameKo + '</small></h1>' + '<h1>' + cityNameKo + '</h1>');
 
                 });
         }
@@ -283,9 +370,12 @@
 <div id="container">
     <ul id="nav">최근 1000개 까지 표시됩니다.</ul>
     <div id='content'>
-        <div id='cityImage'></div>
-        <div id='tagline'></div>
-        <div id='keywords'></div>
+        <div id='cityImage'>
+            <div id="titleContainer">
+                <div id='cityTitle'></div>
+                <div id='keywords'></div>
+            </div>
+        </div>
         <div id='intro'></div>
         <hr>
         <div id='routes'>
@@ -307,13 +397,18 @@
             <div id="phrases-container"></div>
         </div>
         <hr>
-        <div id="weather">
-            <div id="season"></div>
+        <div id="season">
+            <div id="chart"></div>
+            <div id="season-graph"></div>
+            <div id="graph-label"></div>
+            <div id="season-container"></div>
         </div>
         <hr>
         <div id="info">
             <div id="info-container"></div>
         </div>
+        <hr>
+        <div id="special-days"></div>
         <hr>
         <div id='articles'>
             <div class="slide-container">
