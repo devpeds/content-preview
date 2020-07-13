@@ -160,10 +160,10 @@ p {
     position: absolute;
     min-height: 480px;
     width: $w100;
+}
 
-    .animated {
-        transition: left .2s ease-out;
-    }
+.animated {
+    transition: left .2s ease-out;
 }
 
 .slide{
