@@ -118,18 +118,21 @@
 
         button {
             display: none;
-            width: 48px;
-            height: 48px;
+            width: 32px;
+            height: 32px;
             margin: 24px;
             z-index: 2;
             position: absolute;
+            background-color: $black-38;
     
             i {
-                line-height: 0;
+                line-height: 16px;
+                font-size: 16px;
             }
     
             @include breakPointM {
                 display: block;
+                @include flexColCen;
             }
     
         }
