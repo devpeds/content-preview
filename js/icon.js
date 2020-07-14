@@ -19,5 +19,6 @@ icPhone = '<i class="ri-phone-line"></i>',
 icFestival = '<i class="ri-music-2-line"></i>',
 icEvent = '<i class="ri-magic-line"></i>',
 icHoliday = '<i class="ri-hearts-line"></i>',
-icAvoiding = '<i class="ri-thumb-down-line"></i>';
+icAvoiding = '<i class="ri-thumb-down-line"></i>',
+icMenu = '<i class="ri-menu-2-line"></i>';
 
