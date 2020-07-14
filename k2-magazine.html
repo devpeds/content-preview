@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <script src="js/jquery.navgoco.min.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/icon.js"></script>
     <script>
         const parameters = getParameters();
         const baseUrl = 'https://preview.contentful.com/spaces/' + parameters.space + '/entries/';
@@ -31,8 +32,8 @@
                 console.log(baseUrl + parameters.entry + '?access_token=' + parameters.access_token);
                 getEntries(entry.sys.contentType.sys.id);
 
-                // topImage
-                $('#topImage').append('<img src=https://res.cloudinary.com/kyte/image/upload/v1593414810/cities/default-img.jpg>');
+                // cityImage
+                $('#cityImage').append('<img src=https://res.cloudinary.com/kyte/image/upload/v1593414810/cities/default-img.jpg>');
 
                 // title
                 $('#title').append('<h1><small>' + fields.themeCategory + '</small></h1><h1>' + fields.title + '</h1>');
@@ -81,6 +82,15 @@
                     });
                 });
         }
+
+        function lnbDown() {
+            const lnbMenu = document.getElementById("nav");
+            if (lnbMenu.style.display == "block") {
+                lnbMenu.style.display = "none";
+            } else {
+                lnbMenu.style.display = "block";
+            }
+        }
         
     </script>
 
@@ -89,7 +99,9 @@
 <div id="container">
     <ul id="nav">최근 1000개 까지 표시됩니다.</ul>
     <div id='content'>
-        <div id='topImage'></div>
+        <div id='cityImage'>
+            <button onclick="lnbDown()"><i class="ri-menu-2-line"></i></button> 
+        </div>
         <div id='title'></div>
         <div id='mainText'></div>
     </div>

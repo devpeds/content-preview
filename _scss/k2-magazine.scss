@@ -33,6 +33,10 @@ small {
 
 p {
     color: $black-60;
+
+    img {
+        margin-bottom: 0;
+    }
 }
 
 em {
@@ -60,18 +64,39 @@ em {
 }
 
 blockquote {
-    p {
-        margin: 0;
-        border-left: 3px solid $black-12;
-        padding-left: 8px;
-    }
-}
-
-ul {
     background-color: $lgray;
     color: $black-60;
     padding: 8px 12px;
     @include borderR4;
+
+    p {
+       margin-left: 0;
+       margin-right: 0;
+    }
+
+    strong {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        color: $black-87;
+    }
+
+    ul {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 16px;
+        padding: 8px;
+        background-color: $white;
+        border: none;
+    }
+}
+
+ul {
+    color: $black-60;
+    padding: 12px 0;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    border-top: 1px solid $black-12;
+    border-bottom: 1px dashed $black-12;
 
     li {
         strong {
@@ -82,7 +107,7 @@ ul {
 }
 
 // Intro
-#topImage {
+#cityImage {
     width: $w100;
     height: 440px;
 
