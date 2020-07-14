@@ -20,6 +20,9 @@ $kakao-yellow: #ffeb00;
 $kakao-brown: #3c1e1e;
 $border: 1px solid $black-12;
 
+$breakpoint-s: 360px;
+$breakpoint-m: 768px;
+
 @mixin borderB12 {border: 1px solid $black-12;}
 @mixin borderR0 {border-radius: 0;}
 @mixin borderR4 {border-radius: 4px;}
@@ -95,3 +98,16 @@ $w100: 100%;
 @mixin disNone {
     display: none;
 }
+
+@mixin breakPointS {
+    @media (max-width: #{$breakpoint-s}) {
+      @content;
+    }
+}
+
+@mixin breakPointM {
+    @media (max-width: #{$breakpoint-m}) {
+      @content;
+    }
+}
+

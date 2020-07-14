@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
     <script src="js/jquery.navgoco.min.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/icon.js"></script>
     <script>
         const parameters = getParameters();
         const baseUrl = 'https://preview.contentful.com/spaces/' + parameters.space + '/entries/';
@@ -34,6 +35,11 @@
                 //country
                 getCountry(fields.country.sys.id, fields.cityCodeEtp, fields.cityNameKo, fields.tagline);
 
+                //cityGuide
+                if (entry.sys.contentType.sys.id == "cityGuide") {
+                    $('#cityImage').append('<div class="titleBadge">도시가이드</div>')
+                }
+
                 //keyword
                 $('#keywords').append('<p></p>');
                 const keywords = fields.keywords.split(', ');
@@ -48,40 +54,40 @@
 
                 //routes
                 $('#routes').prepend('<h3>한국에서<br>' + fields.cityNameKo + '까지.</h3>');
-                $('#routes-list').append('<p>' + fields.routes[0].departure + '</p><p class="box"><i class="ri-plane-line"></i> hh시간 mm분 비행</p>');
+                $('#routes-list').append('<p>' + fields.routes[0].departure + '</p><p class="box">' + icFlight + 'hh시간 mm분 비행</p>');
                 $('#routes-list').append('<p>' + fields.routes[0].arrival + '</p>');
                 const landmark = fields.landmark;
                 switch (landmark.transportation) { 
                     case "Flight":
-                        $('#routes-list').append('<p class="box"><i class="ri-plane-line"></i>' + landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box">' + icFlight + landmark.description + '</p>');
                         break;
 
                     case "Boat":
-                        $('#routes-list').append('<p class="box"><i class="ri-ship-line"></i>' + landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box">' + icBoat + landmark.description + '</p>');
                         break;
 
                     case "Train":
-                        $('#routes-list').append('<p class="box"><i class="ri-train-line"></i>' + landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box">' + icTrain + landmark.description + '</p>');
                         break;
 
                     case "Subway":
-                        $('#routes-list').append('<p class="box"><i class="ri-subway-line"></i>' + landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box">' + icSubway + landmark.description + '</p>');
                         break;
 
                     case "Bus":
-                        $('#routes-list').append('<p class="box"><i class="ri-bus-line"></i>' + landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box">' + icBus + landmark.description + '</p>');
                         break;
                         
                     case "Car":
-                        $('#routes-list').append('<p class="box"><i class="ri-roadster-line"></i>' + landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box">' + icCar + landmark.description + '</p>');
                         break;
                         
                     case "Tram":
-                        $('#routes-list').append('<p class="box"><i class="ri-train-line"></i>' + landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box">' + icSubway + landmark.description + '</p>');
                         break;
                         
                     case "Walk":
-                        $('#routes-list').append('<p class="box"><i class="ri-walk-line"></i>' + landmark.description + '</p>');
+                        $('#routes-list').append('<p class="box">' + icWalk + landmark.description + '</p>');
                         break;
                 }
                 $('#routes-list').append('<p>' + landmark.name + '</p>');
@@ -92,47 +98,184 @@
                     $('#phrases-container').append('<div class="phrases"><p>' + fields.phrases[i].key + '</p><p>' + fields.phrases[i].value + '</p></div>');
                 }
 
-                //weather
-                $('#weather').prepend('<h3>오늘의<br>' + fields.cityNameKo + '날씨.</h3>');
-                for (let i = 0; i < fields.specialDates.length; i++){
-                    if (fields.specialDates[i].type === "season"){
-                        $('#season').append('<div><i class="ri-pushpin-line"></i><h5>' + fields.specialDates[i].description + '</h5><p>' + fields.specialDates[i].startMonth + '월~' + fields.specialDates[i].endMonth + '월</p></div>');
+                //season
+                $('#season').prepend('<h3>' + fields.cityNameKo + ' 여행하기 좋은 계절은?</h3>');
+
+                let graphBar = document.getElementsByClassName('graph-bar');
+                let today = new Date();
+                let month = today.getMonth();
+
+                for (let i = 0; i < 12; i++){
+                    if (i == month) {
+                        $('#chart').append('<div class="graph-bar thisMonth"></div>');
+                    } else {
+                        $('#chart').append('<div class="graph-bar"></div>');
                     }
-                    if (entry.fields.specialDates[i].type === "avoidingSeason"){
-                        $('#season').append('<div><i class="ri-pushpin-fill"></i><h5>' + fields.specialDates[i].description + '</h5><p>' + fields.specialDates[i].startMonth + '월~' + fields.specialDates[i].endMonth + '월</p></div>');
+                    $('#graph-label').append('<p>' + (i + 1) + '월</p>');
+                }
+
+                $('.graph-bar').each(function() {
+                    var h = Math.floor(Math.random() * 60) + 30;
+                    $(this).css("height", h);
+                });
+                $('#season').append('<p>4계절이 뚜렷한 런던은 여름은 덥고 습하며, 겨울은 우리나라와 비슷한 정도로 춥다. 봄인 4~5월이 쾌적하고 온화한 날씨로 여행하기 좋다.</p>')
+                
+                let seasonWeather;
+                for (let i = 0; i < fields.specialDates.length; i++){
+                    seasonsWeather = fields.specialDates[i];
+                    if (seasonsWeather.type === "season"){
+                        $('#season-container').append('<div class="season-box">' + icDry + '<h5>' + seasonsWeather.description + '</h5><p>' + seasonsWeather.startMonth + '월~' + seasonsWeather.endMonth + '월</p></div>');
+                    }
+                    if (seasonsWeather.type === "avoidingSeason"){
+                        $('#season-container').append('<div class="season-box">' + icRain + '<h5>' + seasonsWeather.description + '</h5><p>' + seasonsWeather.startMonth + '월~' + seasonsWeather.endMonth + '월</p></div>');
                     }
                 }
 
                 //info
-                $('#info').prepend('<h3>' + fields.cityNameKo + '<br>알아가기.</h3>')
-                $('#info-container').append('<div><i class="ri-translate-2"></i><h5>' + fields.languages[0].mainText + '</h5><p>' + fields.languages[0].subText + '</p></div>');
-                $('#info-container').append('<div><i class="ri-empathize-line"></i><h5>' + '종교' + '</h5><p>' + fields.religions + '</p></div>');
-                if (fields.currencies){
-                    $('#info-container').append('<div><i class="ri-money-dollar-circle-line"></i><h5>' + '통화' + '</h5><p>' + fields.currencies + '</p></div>');
-                };
-                if (fields.electricity){
-                    $('#info-container').append('<div><i class="ri-plug-line"></i><h5>' + '전압' + '</h5><p>' + fields.electricity + '</p></div>');
-                };
-                if (fields.tipping){
-                    $('#info-container').append('<div><i class="ri-hand-coin-line"></i><h5>' + '팁 문화' + '</h5><p>' + fields.tipping + '</p></div>');
-                };
-                if (fields.visa){
-                    $('#info-container').append('<div><i class="ri-global-line"></i><h5>' + '비자' + '</h5><p>' + fields.visa + '</p></div>');
-                };
-                if (fields.callingCode){
-                    $('#info-container').append('<div><i class="ri-phone-line"></i><h5>' + '국가번호' + '</h5><p>' + fields.callingCode + '</p></div>');
-                };
+                $('#info').prepend('<h3>' + fields.cityNameKo + ' 알아가기</h3>')
+                $('#info-container').append('<div>' + icLanguage + '<h4>' + fields.languages[0].mainText + '</h4><p>' + fields.languages[0].subText + '</p></div>');
+                $('#info-container').append('<div>' + icReligion + '<h4>종교</h4><p>' + fields.religions + '</p></div>');
+                $('#info-container').append('<div>' + icBed + '<h4>추천 체류기간</h4><p>' + fields.recommendedStayDuration[0].days + '박 ' + fields.recommendedStayDuration[0].nights + '일</p></div>');
+                
+                fetch(baseUrl + fields.country.sys.id + '?access_token=' + parameters.access_token)
+                    .then(function(response) {return response.json();})
+                    .then(function(entry) {
+                        const countryCurrencies = entry.fields.currencies;
+                        const countryElectricity = entry.fields.electricity;
+                        const countryTipping = entry.fields.tipping;
+                        const countryVisa = entry.fields.visa;
+
+                        if (fields.currencies){
+                            $('#info-container').append('<div>' + icCurrencies + '<h4>통화</h4><p>' + fields.currencies + '</p></div>');
+                        } else {
+                            if (countryCurrencies){
+                                $('#info-container').append('<div>' + icCurrencies + '<h4>통화</h4><p>' + countryCurrencies + '</p></div>');
+                            };
+                        }
+
+                        if (fields.electricity){
+                            $('#info-container').append('<div>' + icPlug + '<h4>전압</h4><p>' + fields.electricity + '</p></div>');
+                        } else {
+                            if (countryElectricity){
+                                $('#info-container').append('<div>' + icPlug + '<h4>전압</h4><p>' + countryElectricity + '</p></div>');
+                            };
+                        }
+
+                        if (fields.tipping){
+                            $('#info-container').append('<div>' + icTipping + '<h4>팁 문화</h4><p>' + fields.tipping + '</p></div>');
+                        } else {
+                            if (countryTipping){
+                                $('#info-container').append('<div>' + icTipping + '<h4>팁 문화</h4><p>' + countryTipping + '</p></div>');
+                            };
+                        }
+
+                        if (fields.visa){
+                            $('#info-container').append('<div>' + icGlobal + '<h4>비자</h4><p>' + fields.visa + '</p></div>');
+                        } else {
+                            if (countryVisa){
+                                $('#info-container').append('<div>' + icGlobal + '<h4>' + countryVisa[0].mainText + '</h4><p>' + countryVisa[0].subText + '</p></div>'); // Required Field라 채워져 있어야 함
+                            };
+                        }
+
+                        if (fields.callingCode){
+                            $('#info-container').append('<div>' + icPhone + '<h4>국가번호</h4><p>' + fields.callingCode + '</p></div>');
+                        };
+                        
+                });
+
+                //special days
+                $('#special-days').prepend('<h3>' + fields.cityNameKo + '만의 스페셜데이</h3>');
+                const specialDates = fields.specialDates;
+                let specialDate;
+                let html;
+
+                for (let i = 0; i < specialDates.length; i++) {
+                    specialDate = specialDates[i];
+                    if (specialDate.type == 'festival') {
+                        html = '<div class="row-1"><div class="col-1">' + icFestival + '<p>페스티벌</p></div><div class="col-2"><h4>' + specialDate.description + '</h4><p>' + specialDate.startMonth + '월 ';
+                        
+                        if (specialDate.startDay) {
+                            html += specialDate.startDay + '일';
+                        }
+                        
+                        if (specialDate.endMonth) {
+                            html += ' ~ ' + specialDate.endMonth + '월 ';
+                        }
+                        
+                        if (specialDate.endDay) {
+                            html += specialDate.endDay + '일';
+                        }
+
+                        $('#special-days').append(html + '</p></div>');
+                    }
+
+                    if (specialDate.type == 'event') {
+                        html = '<div class="row-1"><div class="col-1">' + icEvent + '<p>이벤트</p></div><div class="col-2"><h4>' + specialDate.description + '</h4><p>' + specialDate.startMonth + '월 ';
+                        
+                        if (specialDate.startDay) {
+                            html += specialDate.startDay + '일';
+                        }
+                        
+                        if (specialDate.endMonth) {
+                            html += ' ~ ' + specialDate.endMonth + '월 ';
+                        }
+                        
+                        if (specialDate.endDay) {
+                            html += specialDate.endDay + '일';
+                        }
+
+                        $('#special-days').append(html + '</p></div>');
+                    }
+
+                    if (specialDate.type == 'holiday') {
+                        html = '<div class="row-1"><div class="col-1">' + icHoliday + '<p>명절</p></div><div class="col-2"><h4>' + specialDate.description + '</h4><p>' + specialDate.startMonth + '월 ';
+                        
+                        if (specialDate.startDay) {
+                            html += specialDate.startDay + '일';
+                        }
+                        
+                        if (specialDate.endMonth) {
+                            html += ' ~ ' + specialDate.endMonth + '월 ';
+                        }
+                        
+                        if (specialDate.endDay) {
+                            html += specialDate.endDay + '일';
+                        }
+
+                        $('#special-days').append(html + '</p></div>');
+                    }
+
+                    if (specialDate.type == 'avoidingSeason') {
+                        html = '<div class="row-1"><div class="col-1">' + icAvoiding + '<p class="avoid">비추천기간</p></div><div class="col-2"><h4>' + specialDate.description + '</h4><p>' + specialDate.startMonth + '월 ';
+                        
+                        if (specialDate.startDay) {
+                            html += specialDate.startDay + '일';
+                        }
+                        
+                        if (specialDate.endMonth) {
+                            html += ' ~ ' + specialDate.endMonth + '월 ';
+                        }
+                        
+                        if (specialDate.endDay) {
+                            html += specialDate.endDay + '일';
+                        }
+
+                        $('#special-days').append(html + '</p></div>');
+                    }
+                }
 
                 //articles
-                $('#articles').prepend('<h3>' + fields.cityNameKo + '<br>언제갈까요?</h3>');
+                $('#articles').prepend('<h3>' + fields.cityNameKo + ' 언제갈까요?</h3>');
                 var imgUrl;
+                let articleChild;
                 for (let i = 0; i < fields.articles.length; i++) {
-                    if (fields.articles[i].imageUrl){
-                        imgUrl = fields.articles[i].imageUrl;
+                    articleChild = fields.articles[i];
+                    if (articleChild.imageUrl){
+                        imgUrl = articleChild.imageUrl;
                     } else {
                         imgUrl = "https://res.cloudinary.com/kyte/image/upload/v1593414810/cities/default-img.jpg";
                     };
-                    $('.slide-wrapper').append('<div class="slide"><img src=' + imgUrl + '><h4>' + fields.articles[i].title + '</h4><p>' + fields.articles[i].description + '</p></div>');
+                    $('.slide-wrapper').append('<div class="slide"><img src=' + imgUrl + '><h4>' + articleChild.title + '</h4><p>' + articleChild.description + '</p></div>');
                 };
 
                 //articles Slide
@@ -200,8 +343,7 @@
                     //cityImage
                     $('#cityImage').append('<img src=https://res.cloudinary.com/kyte/image/upload/IATA/locations/' + entry.fields.code + '/' + cityCodeEtp + '_0.jpg>');
 
-                    //tagline
-                    $('#tagline').append('<h1><small>' + entry.fields.nameKo + '</small></h1>' + '<h1>' + cityNameKo + '</h1>');
+                    $('#cityTitle').append('<h1><small>' + entry.fields.nameKo + '</small></h1>' + '<h1>' + cityNameKo + '</h1>');
                 });
         }
 
@@ -249,9 +391,12 @@
 <div id="container">
     <ul id="nav">최근 1000개 까지 표시됩니다.</ul>
     <div id='content'>
-        <div id='cityImage'></div>
-        <div id='tagline'></div>
-        <div id='keywords'></div>
+        <div id='cityImage'>
+            <div id="titleContainer">
+                <div id='cityTitle'></div>
+                <div id='keywords'></div>
+            </div>
+        </div>
         <div id='intro'></div>
         <hr>
         <div id='routes'>
@@ -273,46 +418,18 @@
             <div id="phrases-container"></div>
         </div>
         <hr>
-        <div id="weather">
-            <div class="today">
-                <h1>☀️</h1>
-                <h1>24℃</h1>
-                <h5>최저 19℃ - 최고 26 ℃</h5>
-                <p>맑고 화창해요!</p>
-            </div>
-            <div class="week">
-                <div class="weaterCard">
-                    <h3>☀️</h3>
-                    <h5>24℃</h5>
-                    <p>7.1(화)</cp>
-                </div>
-                <div class="weaterCard">
-                    <h3>⛅️</h3>
-                    <h5>24℃</h5>
-                    <p>7.1(화)</cp>
-                </div>
-                <div class="weaterCard">
-                    <h3>☁️</h3>
-                    <h5>24℃</h5>
-                    <p>7.1(화)</cp>
-                </div>
-                <div class="weaterCard">
-                    <h3>🌧</h3>
-                    <h5>24℃</h5>
-                    <p>7.1(화)</cp>
-                </div>
-                <div class="weaterCard">
-                    <h3>☀️</h3>
-                    <h5>24℃</h5>
-                    <p>7.1(화)</cp>
-                </div>
-            </div>
-            <div id="season"></div>
+        <div id="season">
+            <div id="chart"></div>
+            <div id="season-graph"></div>
+            <div id="graph-label"></div>
+            <div id="season-container"></div>
         </div>
         <hr>
         <div id="info">
             <div id="info-container"></div>
         </div>
+        <hr>
+        <div id="special-days"></div>
         <hr>
         <div id='articles'>
             <div class="slide-container">

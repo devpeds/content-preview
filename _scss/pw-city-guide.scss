@@ -9,30 +9,50 @@ h3 + h3 {
     margin-top: -24px;
 }
 
-
-// Intro
-#keywords{
-    margin-bottom: 8px;
-
-    p {
-        color: $pwRed;
-    }
-}
-
-small {
-    color: $black-38;
-    @include body2;
-}
-
+// cityImage
 #cityImage{
     height: 440px;
     width: $w100;
+    color: $white;
+    position: relative;
+
+    .titleBadge {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        padding: 5px 13px;
+        font-size: 11px;
+        line-height: 14px;
+        font-weight: bold;
+        background-color: $black-12;
+        border: 1px solid $white;
+        border-radius: 17px;
+    }
 
     img {
         height: 440px;
         object-fit: cover;
         width: $w100;
         @include borderR0;
+    }
+
+    #titleContainer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background: linear-gradient(rgba(0,0,0,.0), $black-60);
+
+        small {
+            @include body2;
+        }
+
+        #keywords {
+        
+            p {
+                color: $white;
+                margin-bottom: 32px;
+            }
+        }
     }
 }
 
@@ -201,75 +221,89 @@ small {
     }
 }
 
-/* weather */
-.today{
-    @include marginLR;
-    @include flexColCen;
-}
+#season {
 
-.today {
-    h1 {
-        &:first-child {
-            margin: 16px;
-            font-size: 56px;
+    #chart {
+        width: 312px;
+        height: 144px;
+        position: relative;
+        border-bottom: 1px solid $black-38;
+        @include flexRowAround;
+        @include marginLR;
+    
+        &:after { 
+            content: '';
+            position: absolute;
+            border-top: 1px solid $black-12;
+            height: 144px;
+            width: 312px;
+            transform: translateY(96px);
+            z-index: 0;
         }
-        :nth-child(2) {
-            @include margin0;
+    
+        &:before { 
+            content: '';
+            position: absolute;
+            border-top: 1px solid $black-12;
+            height: 144px;
+            width: 312px;
+            transform: translateY(48px);
+            z-index: 0;
+        }
+    
+        .graph-bar {
+            width: 16px;
+            background: #EF8E9E;
+            align-self: flex-end;
+            border-radius: 4px 4px 0 0;
+            z-index: 1;
+        }
+    
+        .thisMonth {
+            background: $pwRed;
         }
     }
 
-    h5, p {
-        @include margin0;
-    }
-}
-
-.week{
-    margin-top: 32px;
-    @include marginLR;
-    @include flexRowAround;
-}
-
-.weaterCard {
-    @include flexColCen;
-
-    h3 {
-        @include margin0;
-        font-size: 32px;
-    }
-
-    h5 {
-        margin: 8px 0 0 0;
-    }
-
-    p {
-        @include margin0;
-        font-size: 12px;
-    }
-}
-
-#season{
-    padding: 12px 12px 4px 12px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-top: 24px;
-    background-color: $lgray;
-    @include marginLR;
-    @include borderR4;
-
-    div {
-        width: 50%;
-        margin-bottom: 8px;
-        display: flex;
-
-        h5 {
-            margin: 0 8px 0 4px;
-        }
+    #graph-label {
+        width: 312px;
+        @include flexRowAround;
+        @include marginLR;
 
         p {
-            @include margin0;
+            font-size: 11px;
+            color: $black-60;
+            margin: 8px 0 0 0;
         }
     }
+
+    #season-container {
+        margin-top: 16px;
+        @include flexRowBetween;
+        @include marginLR;
+
+        .season-box{
+            width: 50%;
+            margin-top: 0;
+            margin-right: 8px;
+            padding: 8px;
+            background-color: $lgray;
+            border-radius: 4px;
+            @include flexRowStart;
+    
+            h5 {
+                margin: 0 8px;
+            }
+
+            p {
+                margin: 0;
+            }
+        }
+
+        .season-box:last-child {
+            margin-right: 0;
+        }
+    }
+
 }
 
 
@@ -294,7 +328,7 @@ small {
             margin-right: 0;
         }
 
-        p, h5 {
+        p, h4 {
             @include margin0;
         }
 
@@ -304,5 +338,45 @@ small {
     }
 }
 
+// special dates
+#special-days {
 
+    .row-1 {
+        width: 312px;
+        height: 72px;
+        margin-top: 8px;
+        @include marginLR;
+        @include flexRowStart;
 
+        .col-1 {
+            width: 72px;
+            height: 72px;
+            border-radius: 4px;
+            background-color: $lgray;
+            @include flexColCen;
+
+            i {
+                font-size: 24px;
+                margin-bottom: 4px;
+                margin-top: 2px;
+            }
+
+            p {
+                margin: 0;
+                font-size: 11px;
+                color: $blue;
+            }
+
+            .avoid {
+                color: $warning;
+            }
+        }
+
+        .col-2 {
+
+            h4, p {
+                margin: 0 0 0 16px;
+            }
+        }
+    }
+}   

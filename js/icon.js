@@ -1,0 +1,23 @@
+const
+icReligion = '<i class="ri-empathize-line"></i>',
+icLanguage = '<i class="ri-translate-2"></i>',
+icFlight = '<i class="ri-plane-line"></i>',
+icSubway = '<i class="ri-subway-line"></i>',
+icBoat = '<i class="ri-ship-line"></i>',
+icTrain = '<i class="ri-train-line"></i>',
+icBus = '<i class="ri-bus-line"></i>',
+icCar = '<i class="ri-roadster-line"></i>',
+icWalk = '<i class="ri-walk-line"></i>',
+icDry = '<i class="ri-blaze-line"></i>',
+icRain = '<i class="ri-umbrella-line"></i>',
+icBed = '<i class="ri-hotel-bed-line"></i>',
+icCurrencies = '<i class="ri-money-dollar-circle-line"></i>',
+icPlug = '<i class="ri-plug-line"></i>',
+icTipping = '<i class="ri-hand-coin-line"></i>',
+icGlobal = '<i class="ri-global-line"></i>',
+icPhone = '<i class="ri-phone-line"></i>',
+icFestival = '<i class="ri-music-2-line"></i>',
+icEvent = '<i class="ri-magic-line"></i>',
+icHoliday = '<i class="ri-hearts-line"></i>',
+icAvoiding = '<i class="ri-thumb-down-line"></i>';
+

@@ -1,6 +1,10 @@
 #container {
     max-width: 720px;
     margin: 0 auto;
+
+    @include breakPointM {
+        @include flexColCen;
+    }
 }
 
 #nav {
@@ -56,6 +60,16 @@
                 }
             }
         }
+
+        p {
+            color: $black-60;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        @include breakPointM {
+            padding: 4px;
+        }
     }
 
     .open {
@@ -79,6 +93,13 @@
             }
         }
     }
+
+    @include breakPointM {
+        width: 100vw;
+        background-color: $white;
+        z-index: 2;
+        padding: 16px;
+    }
 }
 
 #nav, #nav ul, #nav li {
@@ -89,12 +110,7 @@
     max-width: 360px;
     float: right;
 
-    // p {
-
-    //     img {
-    //         margin-top: 0;
-    //         margin-bottom: 16px;
-    //         border-radius: 0;
-    //     }
-    // }
+    @include breakPointM {
+        float: none;
+    }
 }
