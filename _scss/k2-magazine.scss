@@ -5,15 +5,20 @@ img {
 
 h2 {
     margin-top: 32px;
-}
+    line-height: 24px;
 
-h3 {
-    margin-top: 40px;
+    small {
+        font-size: 14px;
+    }
 
     span {
         color: $blue;
         font-size: 14px;
     }
+}
+
+h3 {
+    margin-top: 32px;
 }
 
 h4 {
@@ -104,9 +109,23 @@ hr {
 
         }
 
-        h2 {
+        h3 {
             color: $white;
             margin-bottom: 32px;
+            line-height: 20px;
+            font-size: 14px;
+            margin-top: 0;
+            font-weight: normal;
+            line-height: 22px;
+
+            small {
+                font-size: 14px;
+            }
+        
+            span {
+                color: $blue;
+                font-size: 14px;
+            }
         }
     }
 }
@@ -159,15 +178,20 @@ blockquote {
         border: none;
     }
 
+    hr {
+        margin-top: 24px;
+        border: 0px;
+        height: 4px;
+        background-color: $black-04;
+    }
+
 }
 
 ul {
     color: $black-60;
     padding: 0;
-    margin-top: 0;
+    margin-top: 16px;
     margin-bottom: 24px;
-    border-top: 1px solid $black-12;
-    border-bottom: 1px dashed $black-12;
 
     li {
         margin-bottom: 0;
