@@ -48,7 +48,9 @@
                 }
 
                 //intro
-                $('#intro').append('<h2>' + fields.tagline + '</h2>');
+                let tagTitle = fields.tagline;
+                let breakTitle = tagTitle.replace("\\n", "<br>");
+                $('#intro').append('<h2>' + breakTitle + '</h2>');
                 $('#intro').append(md.render(fields.intro));
                 // 더보기 버튼 $('#intro').append('<button onclick="#" class="outline"><i class="ri-download-line"></i> 더보기</button>'); 
 
