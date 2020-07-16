@@ -36,11 +36,18 @@
                 $('#cityImage').append('<img src=https://res.cloudinary.com/kyte/image/upload/v1593414810/cities/default-img.jpg>');
 
                 // title
-                $('#title').append('<h1><small>' + fields.themeCategory + '</small></h1><h1>' + fields.title + '</h1>');
-                $('#title').append('<h2>' + fields.subTitle + '</h2>');
+                let mainTitle = fields.title;
+                let breakTitle = mainTitle.replace("\\n", "<br>");
+                $('#title').append('<h1><small>' + fields.themeCategory + '</small></h1><h1>' + breakTitle + '</h1>');
+                $('#title').append('<h2>' + fields.subTitle + '</h2>');   
 
                 // mainText
                 $('#mainText').append(md.render(fields.content));
+
+                // magazine
+                if (entry.sys.contentType.sys.id == "magazine") {
+                    $('#cityImage').append('<div class="titleBadge">매거진</div>')
+                }
                 
             });
 
@@ -52,9 +59,12 @@
                     let category;
                     let style;
                     let themeCategory;
+                    let breakLiTitle;
+                    
                     entries.items.forEach(function (item) {
 
                         themeCategory = item.fields.themeCategory.replace("&", "and");
+                        breakLiTitle = item.fields.title.replace('\\n', ' ');
 
                         if (!$('#' + themeCategory).length) {
                             $('#nav').append('<li id="' + themeCategory + '"><a href="#">' + themeCategory + '</a><ul></ul></li>');
@@ -67,7 +77,7 @@
                             category.addClass('open');
                         } else style = '';
 
-                        category.children('ul').append('<li class="' + style + '"><a href="?space=' + parameters.space + "&entry=" + item.sys.id + '&access_token=' + parameters.access_token + '">' + item.fields.title + '</a></li>');
+                        category.children('ul').append('<li class="' + style + '"><a href="?space=' + parameters.space + "&entry=" + item.sys.id + '&access_token=' + parameters.access_token + '">' + breakLiTitle + '</a></li>');
                     });
 
                     $('#nav').navgoco({
@@ -100,9 +110,11 @@
     <ul id="nav">최근 1000개 까지 표시됩니다.</ul>
     <div id='content'>
         <div id='cityImage'>
-            <button onclick="lnbDown()"><i class="ri-menu-2-line"></i></button> 
+            <button onclick="lnbDown()"><i class="ri-menu-2-line"></i></button>
+            <div id="titleContainer">
+                <div id='title'></div>
+            </div>
         </div>
-        <div id='title'></div>
         <div id='mainText'></div>
     </div>
 </div>
