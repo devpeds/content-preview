@@ -19,6 +19,12 @@ h2 {
 
 h3 {
     margin-top: 32px;
+    line-height: 30px;
+
+    small {
+        font-size: 14px;
+        font-weight: bold;
+    }
 }
 
 h4 {
@@ -185,6 +191,10 @@ blockquote {
         background-color: $black-04;
     }
 
+}
+
+small{
+    font-size: 11px;
 }
 
 ul {
