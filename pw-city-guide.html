@@ -137,7 +137,7 @@
                 $('#info').prepend('<h3>' + fields.cityNameKo + ' 알아가기</h3>')
                 $('#info-container').append('<div>' + icLanguage + '<h4>' + fields.languages[0].mainText + '</h4><p>' + fields.languages[0].subText + '</p></div>');
                 $('#info-container').append('<div>' + icReligion + '<h4>종교</h4><p>' + fields.religions + '</p></div>');
-                $('#info-container').append('<div>' + icBed + '<h4>추천 체류기간</h4><p>' + fields.recommendedStayDuration[0].days + '박 ' + fields.recommendedStayDuration[0].nights + '일</p></div>');
+                $('#info-container').append('<div>' + icBed + '<h4>추천 체류기간</h4><p>' + fields.recommendedStayDuration[0].nights + '박 ' + fields.recommendedStayDuration[0].days + '일</p></div>');
                 
                 fetch(baseUrl + fields.country.sys.id + '?access_token=' + parameters.access_token)
                     .then(function(response) {return response.json();})
