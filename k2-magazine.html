@@ -39,7 +39,7 @@
                 let mainTitle = fields.title;
                 let breakTitle = mainTitle.replace("\\n", "<br>");
                 $('#title').append('<h1><small>' + fields.themeCategory + '</small></h1><h1>' + breakTitle + '</h1>');
-                $('#title').append('<h3>' + fields.subTitle + '</h3>');   
+                $('#title').append('<h2 id="subTitle">' + fields.subTitle + '</h2>');   
 
                 // mainText
                 $('#mainText').append(md.render(fields.content));
