@@ -56,6 +56,19 @@ h3 + h3 {
     }
 }
 
+/* Intro */
+#intro {
+    h2 {
+        margin-top: 48px;
+        margin-bottom: 0;
+    }
+
+    img {
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+}
+
 /* routes */
 #routes {
     p {
@@ -206,10 +219,10 @@ h3 + h3 {
 
 .phrases{
     display: inline-flex;
-    padding: 12px 16px;
+    padding: 14px 16px;
     margin: 4px 0;
     border: $border;
-    border-radius: 0 12px 12px 12px;
+    border-radius: 0 16px 16px 16px;
 
     p {
         @include margin0;
@@ -364,11 +377,11 @@ h3 + h3 {
             p {
                 margin: 0;
                 font-size: 11px;
-                color: $blue;
+                color: $pwRed;
             }
 
             .avoid {
-                color: $warning;
+                color: $black-60;
             }
         }
 

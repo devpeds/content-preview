@@ -50,7 +50,7 @@
                 //intro
                 let mainTitle = fields.tagline;
                 let breakTitle = mainTitle.replace("\\n", "<br>");
-                $('#intro').append('<h2>' + breakTitle + ' 소개</h2>');
+                $('#intro').append('<h2>' + breakTitle + '.</h2>');
                 $('#intro').append(md.render(fields.intro));
                 // 더보기 버튼 $('#intro').append('<button onclick="#" class="outline"><i class="ri-download-line"></i> 더보기</button>'); 
 
@@ -101,7 +101,7 @@
                 }
 
                 //season
-                $('#season').prepend('<h3>' + fields.cityNameKo + ' 여행하기 좋은 계절은?</h3>');
+                $('#season').prepend('<h3>' + fields.cityNameKo + ' 여행하기<br>좋은 계절은?</h3>');
 
                 let graphBar = document.getElementsByClassName('graph-bar');
                 let today = new Date();
@@ -134,7 +134,7 @@
                 }
 
                 //info
-                $('#info').prepend('<h3>' + fields.cityNameKo + ' 알아가기</h3>')
+                $('#info').prepend('<h3>' + fields.cityNameKo + '<br>알아가기.</h3>')
                 $('#info-container').append('<div>' + icLanguage + '<h4>' + fields.languages[0].mainText + '</h4><p>' + fields.languages[0].subText + '</p></div>');
                 $('#info-container').append('<div>' + icReligion + '<h4>종교</h4><p>' + fields.religions + '</p></div>');
                 $('#info-container').append('<div>' + icBed + '<h4>추천 체류기간</h4><p>' + fields.recommendedStayDuration[0].nights + '박 ' + fields.recommendedStayDuration[0].days + '일</p></div>');
@@ -186,7 +186,7 @@
                 });
 
                 //special days
-                $('#special-days').prepend('<h3>' + fields.cityNameKo + '만의 스페셜데이</h3>');
+                $('#special-days').prepend('<h3>' + fields.cityNameKo + '만의<br>스페셜데이.</h3>');
                 const specialDates = fields.specialDates;
                 let specialDate;
                 let html;
@@ -267,7 +267,7 @@
                 }
 
                 //articles
-                $('#articles').prepend('<h3>' + fields.cityNameKo + ' 언제갈까요?</h3>');
+                $('#articles').prepend('<h3>' + fields.cityNameKo + '<br>언제갈까요?</h3>');
                 var imgUrl;
                 let articleChild;
                 for (let i = 0; i < fields.articles.length; i++) {
