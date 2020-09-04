@@ -36,9 +36,8 @@
                 $('#cityImage').append('<img src=https://res.cloudinary.com/kyte/image/upload/v1593414810/cities/default-img.jpg>');
 
                 // title
-                let mainTitle = fields.title;
-                let breakTitle = mainTitle.replace("\\n", "<br>");
-                $('#title').append('<h1><small>' + fields.themeCategory + '</small></h1><h1>' + breakTitle + '</h1>');
+                let mainTitle = fields.entryTitle;
+                $('#title').append('<h1><small>' + fields.themeCategory + '</small></h1><h1>' + mainTitle + '</h1>');
                 $('#title').append('<h2 id="subTitle">' + fields.subTitle + '</h2>');   
 
                 // mainText
