@@ -24,6 +24,7 @@
         fetch(baseUrl + parameters.entry + '?access_token=' + parameters.access_token)
             .then(response => response.json())
             .then(function (entry) {
+
                 console.log(baseUrl + parameters.entry + '?access_token=' + parameters.access_token);
 
                 const fields = entry.fields;
@@ -57,8 +58,7 @@
                         category = "스페셜";
                         break;
                 }
-                
-                $('#heroImage').attr("src", 'https://res.cloudinary.com/kyte/image/upload/v1593414810/cities/default-img.jpg');
+                $('#heroImage').attr("src", fields.image[0].secure_url);
                 $('#category').html(category);
                 $('#title').html(fields.title);
                 $('#content').html(md.render(fields.content));
