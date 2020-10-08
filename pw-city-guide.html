@@ -270,8 +270,8 @@
                 $('#articles').prepend('<h3>' + fields.cityNameKo + '<br>언제갈까요?</h3>');
                 var imgUrl;
                 let articleChild;
-                for (let i = 0; i < fields.articles.length; i++) {
-                    articleChild = fields.articles[i];
+                for (let i = 0; i < fields.columns.length; i++) {
+                    articleChild = fields.columns[i];
                     if (articleChild.imageUrl){
                         imgUrl = articleChild.imageUrl;
                     } else {
