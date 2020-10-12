@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/pw-default.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="css/pw-contentful.css">
+    <link rel="stylesheet" href="css/pw-preview.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
@@ -24,7 +24,6 @@
         fetch(baseUrl + parameters.entry + '?access_token=' + parameters.access_token)
             .then(response => response.json())
             .then(function (entry) {
-
                 console.log(baseUrl + parameters.entry + '?access_token=' + parameters.access_token);
 
                 const fields = entry.fields;
@@ -58,9 +57,9 @@
                         category = "스페셜";
                         break;
                 }
-                $('#heroImage').attr("src", fields.image[0].secure_url);
-                $('#category').html(category);
+                $('#sub-title').html(category);
                 $('#title').html(fields.title);
+                $('#hero-image').attr('src', fields.image[0].secure_url);
                 $('#content').html(md.render(fields.content));
             });
     </script>
@@ -68,11 +67,11 @@
 <body>
 <div id="container">
     <div id="hero">
-        <div id="heroTitle">
-            <p id="category"></p>
+        <div id="title-container">
+            <p id="sub-title"></p>
             <h1 id="title"></h1>
         </div>
-        <img id="heroImage">
+        <img id="hero-image">
     </div>
     <div id="content"></div>
 </div>
