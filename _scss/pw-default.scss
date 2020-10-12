@@ -374,9 +374,22 @@ blockquote h4:first-child {
   margin-top: 16px;
 }
 
-blockquote p {
+blockquote p,
+blockquote ul {
   margin-left: 16px;
   margin-right: 16px;
+}
+
+blockquote h5 {
+  font-size: 16px;
+  margin-top: 16px;
+  margin-right: 16px;
+  margin-bottom: 12px;
+  margin-left: 16px;
+}
+
+blockquote h5:after {
+  display: none;
 }
 
 button {
@@ -475,8 +488,14 @@ li {
   margin-bottom: 4px;
 }
 
+li p {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 ol, ul {
-  padding-left: 24px;
+  margin-top: -8px;
+  padding-left: 16px;
 }
 
 p img {
@@ -569,7 +588,7 @@ table td:first-child {
 #hero {
   height: 440px;
   width: 100%;
-  color: $white;
+  color: #ffffff;
   position: relative;
 }
 
