@@ -540,7 +540,7 @@ table td:first-child {
 
 .carousel li img {
     scroll-snap-align: center;
-    border-radius: 4px;
+    border-radius: 8px;
     height: 192px;
     object-fit: cover;
 }
