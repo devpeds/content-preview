@@ -61,6 +61,11 @@
                 $('#title').html(fields.title);
                 $('#hero-image').attr('src', fields.image[0].secure_url);
                 $('#content').html(md.render(fields.content));
+
+                const images = document.querySelectorAll('#content img');
+                for (let i = 0; i < images.length; i++) {
+                  images[i].outerHTML += '<div class="alt">' + images[i].alt + '</div>'
+                }
             });
     </script>
 </head>
