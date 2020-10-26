@@ -34,6 +34,12 @@
                 $('#title').html(fields.cityNameKo);
                 $('#tagline').html(fields.tagline);
                 $('#content').html(md.render(fields.intro));
+
+                const images = document.querySelectorAll('#content img');
+                for (let i = 0; i < images.length; i++) {
+                  images[i].outerHTML += '<div class="alt">' + images[i].alt + '</div>'
+                }
+
                 $('#column').html(fields.cityNameKo + '<br>언제 갈까요?');
 
                 let imgUrl;
@@ -46,7 +52,7 @@
                         imgUrl = 'https://res.cloudinary.com/kyte/image/upload/v1593414810/cities/default-img.jpg';
                     }
 
-                    $('.carousel').append('<li><img src=' + imgUrl + '><p><strong>' + column.title + '</strong></p><p>' + column.description + '</p></li>');
+                    $('.carousel').append('<li><img src=' + imgUrl + '><div class="alt">' + column.imageDescription + '</div><p><strong>' + column.title + '</strong></p><p>' + column.description + '</p></li>');
                 }
             });
 

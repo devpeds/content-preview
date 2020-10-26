@@ -544,3 +544,23 @@ table td:first-child {
     height: 192px;
     object-fit: cover;
 }
+
+.carousel .alt {
+    right: 20px;
+    margin-top: -36px;
+}
+
+.carousel li:last-child .alt {
+    right: 32px;
+}
+
+.alt {
+    background: rgba(0, 0, 0, .38);
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 10px;
+    position: absolute;
+    padding: 0 6px;
+    right: 48px;
+    margin-top: -28px;
+}
