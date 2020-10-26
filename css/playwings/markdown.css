@@ -543,15 +543,7 @@ table td:first-child {
     border-radius: 8px;
     height: 192px;
     object-fit: cover;
-}
-
-.carousel .alt {
-    right: 20px;
-    margin-top: -36px;
-}
-
-.carousel li:last-child .alt {
-    right: 32px;
+    display: block;
 }
 
 .alt {
@@ -559,8 +551,8 @@ table td:first-child {
     border-radius: 4px;
     color: #ffffff;
     font-size: 10px;
-    position: absolute;
     padding: 0 6px;
-    right: 48px;
+    margin-left: 8px;
     margin-top: -28px;
+    position: absolute;
 }
