@@ -475,6 +475,10 @@ p img {
     width: 100%;
 }
 
+p:first-child {
+    margin: 0;
+}
+
 p:first-child img {
     border-radius: 0;
     margin-bottom: 16px;
